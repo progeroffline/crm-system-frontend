@@ -10,18 +10,20 @@ const sizeClasses: Record<LogotypeSize, string> = {
   lg: 'text-2xl',
 };
 
-const defaultClasses = ['font-black', 'uppercase', 'text-primary'];
+const defaultClasses = ['font-black', 'uppercase'];
 
-const LogotypeComponent: React.FC<LogotypeProps> = ({ className, variant = 'sm', ...props }) => {
+const LogotypeLabel: React.FC<LogotypeProps> = ({ className, variant = 'sm', ...props }) => {
   const combinedClassName = [...defaultClasses, sizeClasses[variant], className]
     .filter(Boolean)
     .join(' ');
 
   return (
-    <span className={combinedClassName} {...props}>
-      Lumens crm
-    </span>
+    <>
+      <span className={combinedClassName} {...props}>
+        Lumens crm
+      </span>
+    </>
   );
 };
 
-export default LogotypeComponent;
+export default LogotypeLabel;

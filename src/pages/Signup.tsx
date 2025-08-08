@@ -3,22 +3,23 @@ import LogotypeLabel from '@/components/branding/Logotype';
 import LogotypeImage from '@/components/branding/LogotypeImage';
 import ThemeControls from '@/components/controls/ThemeController';
 import EnterIcon from '@/components/icons/Enter';
-import { PasswordInputField } from '@/components/inputs/Password';
+import { PasswordWithMaskInputField } from '@/components/inputs/Password';
 import UsernameInputField from '@/components/inputs/Username';
-import { useAuth } from '@/contexts/AuthContext';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+const Signup = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [repeatedPassword, setRepeatedPassword] = useState<string>('');
 
-  const { login } = useAuth();
+  const navigate = useNavigate();
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { data, status } = await backednApiInterface.auth.login({ username, password });
+    const { data: _, status } = await backednApiInterface.auth.register({ username, password });
     if (status !== 201) return;
 
-    login(data.access_token, data.refresh_token);
+    return navigate('/login');
   };
 
   return (
@@ -34,9 +35,9 @@ const LoginPage = () => {
         </div>
         <div className="w-full flex flex-col justify-center items-center">
           <div className="w-full flex flex-col justify-center items-center mb-6">
-            <h3 className="text-3xl font-bold mb-2">Вход</h3>
+            <h3 className="text-3xl font-bold mb-2">Создать аккаунт</h3>
             <p className="text-base text-center">
-              Войдите в Lumens CRM для получения доступа к функционалу
+              Создайте аккаунт для Lumens CRM, чтоб получить доступ к функционалу
             </p>
           </div>
           <fieldset className="w-full fieldset">
@@ -46,21 +47,27 @@ const LoginPage = () => {
               value={username}
               onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
             />
-            <PasswordInputField
+            <PasswordWithMaskInputField
               label="Ваш пароль"
               placeholder="Password"
               value={password}
               onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             />
+            <PasswordWithMaskInputField
+              label="Повторите свой пароль"
+              placeholder="Password"
+              value={repeatedPassword}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setRepeatedPassword(e.target.value)}
+            />
           </fieldset>
         </div>
         <div className="w-full flex flex-col items-center">
           <button className="btn btn-block btn-primary">
-            Войти
+            Создать аккаунт
             <EnterIcon />
           </button>
-          <a className="link link-secondary mt-1" href="/signup">
-            Создать аккаунт
+          <a className="link link-secondary mt-1" href="/login">
+            Войти в существующий аккаунт
           </a>
         </div>
       </form>
@@ -68,4 +75,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Signup;

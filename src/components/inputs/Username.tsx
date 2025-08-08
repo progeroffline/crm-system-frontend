@@ -1,10 +1,15 @@
 import UserIcon from '../icons/User';
 import InputFieldProps from './DefaultProps';
 
-const UsernameInputField: React.FC<InputFieldProps> = ({ label, validationText, placeholder }) => {
+const UsernameInputField: React.FC<InputFieldProps> = ({
+  label,
+  validationText,
+  placeholder,
+  onChange,
+}) => {
   return (
-    <>
-      <legend className="w-full fieldset-legend mt-2">{label}</legend>
+    <div>
+      <legend className="w-full fieldset-legend text-base">{label}</legend>
       <label className="w-full input validator">
         <UserIcon />
         <input
@@ -15,10 +20,11 @@ const UsernameInputField: React.FC<InputFieldProps> = ({ label, validationText, 
           minLength={3}
           maxLength={30}
           title="Only letters, numbers or dash"
+          onChange={onChange}
         />
       </label>
       <p className="validator-hint">{validationText}</p>
-    </>
+    </div>
   );
 };
 

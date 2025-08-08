@@ -1,19 +1,12 @@
-import IconProps from '@/components/icons/DefaultProps';
-
-const defaultClasses = ['size-6'];
+import IconProps, { generalIconProps } from '@/components/icons/DefaultProps';
+import { mergeClassNames } from '@/lib/utils';
 
 const EnterIcon: React.FC<IconProps> = ({ className, ...props }) => {
-  const combinedClassName = [...defaultClasses, className].filter(Boolean).join(' ');
-
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className={combinedClassName}
+      {...generalIconProps}
       {...props}
+      className={mergeClassNames(generalIconProps.className, className)}
     >
       <path
         strokeLinecap="round"
