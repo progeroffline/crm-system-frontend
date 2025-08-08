@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -14,4 +13,3 @@ If you are developing a production application, we recommend using TypeScript wi
 =======
 # crm-system-frontend
 The frontend of the crm system for lumens agency
->>>>>>> adceed173a53ca1749a399d2aa8cd4b149bf7d63
