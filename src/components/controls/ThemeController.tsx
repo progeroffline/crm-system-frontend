@@ -14,13 +14,13 @@ const ThemeControls: React.FC<HTMLProps<HTMLLabelElement>> = ({ className, ...pr
   }, [theme]);
 
   return (
-    <div className="btn btn-circle">
+    <div className="btn btn-circle btn-ghost">
       <label className={combinedClassName} {...props}>
         <input
           type="checkbox"
           className="theme-controller"
           value="synthwave"
-          onChange={() => setTheme(theme === 'emerald' ? 'dracula' : 'emerald')}
+          onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')}
         />
 
         <SunIcon className="swap-off size-8" />

@@ -9,7 +9,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import ProtectedLayout from './layouts/ProtectedLayout';
 import GuestLayout from './layouts/GuestLayout';
 import Profile from './pages/Profile';
-import Dashboard from './pages/Dashboard';
+import Statistics from './pages/Statistics';
 import Settings from './pages/Settings';
 
 const router = createBrowserRouter([
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/',
-            element: <Dashboard />,
+            element: <Statistics />,
           },
           {
             path: '/profile',

@@ -17,15 +17,15 @@ interface SideBarProps {
 const SideBar: React.FC<SideBarProps> = ({ isCollapsed, items }) => {
   return (
     <aside
-      className={`bg-base-200 text-base-content transition-all duration-300 ease-in-out ${isCollapsed ? 'w-20' : 'w-64'}`}
+      className={`border-r border-base-300 text-base-content transition-all duration-300 ease-in-out ${isCollapsed ? 'w-20' : 'w-64'}`}
     >
-      <div className="flex items-center justify-center p-2 h-16 shadow-sm">
-        <Link to="/" className="btn btn-primary text-xl w-full overflow-hidden">
+      <div className="flex items-center justify-center p-2 h-16">
+        <Link to="/" className="btn btn-primary text-xl overflow-hidden mr-1">
           <LogotypeImage className="h-full flex-shrink-0" />
           {!isCollapsed && <LogotypeLabel className="ml-2" />}
         </Link>
       </div>
-      <ul className="menu p-4 w-full">
+      <ul className="menu p-2 w-full">
         {items.map((item) => (
           <li key={item.path}>
             {isCollapsed ? (

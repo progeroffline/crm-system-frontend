@@ -59,7 +59,7 @@ const LoginPage = () => {
             Войти
             <EnterIcon />
           </button>
-          <a className="link link-secondary mt-1" href="/signup">
+          <a className="link mt-1" href="/signup">
             Создать аккаунт
           </a>
         </div>

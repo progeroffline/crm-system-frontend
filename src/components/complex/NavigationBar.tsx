@@ -25,7 +25,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ onToggleSidebar }) => {
   };
 
   return (
-    <div className="navbar bg-base-200 shadow-sm pr-0 pl-0">
+    <div className="navbar pr-0 pl-0 border-b border-base-300">
       <div className="flex-1">
         <label
           htmlFor="main-drawer"
@@ -91,6 +91,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ onToggleSidebar }) => {
                     </div>
                   )}
                 </div>
+                <div className="divider"></div>
                 <ul className="menu text-base-content min-h-full w-80 p-4">
                   <li>
                     <Link to="/profile" onClick={handleDrawerItemClick}>

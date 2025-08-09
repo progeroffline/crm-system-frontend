@@ -18,14 +18,14 @@ const ProtectedLayout = () => {
   };
 
   return (
-    <div className="flex h-screen bg-base-100">
+    <div className="flex h-screen">
       <SideBar
         isCollapsed={isSidebarCollapsed}
-        items={[{ path: '/', label: 'Dashboard', icon: <ChartPie /> }]}
+        items={[{ path: '/', label: 'Statistics', icon: <ChartPie /> }]}
       />
       <div className="flex-1 flex flex-col overflow-hidden">
         <NavigationBar onToggleSidebar={toggleSidebar} />
-        <main className="flex-1 overflow-y-auto p-4">
+        <main className="flex-1 overflow-y-auto p-4 bg-base-200">
           <Outlet />
         </main>
       </div>
