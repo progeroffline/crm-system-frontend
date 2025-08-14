@@ -95,9 +95,7 @@ const DataTreeTable = <T extends { id: string | number }>({
     return (
       <React.Fragment key={item.id}>
         <tr
-          className={`transition-all hover:brightness-120 ${hasChildren ? 'cursor-pointer' : ''} ${
-            isEven ? 'bg-base-200' : ''
-          }`}
+          className={`${hasChildren ? 'cursor-pointer' : ''} ${isEven ? 'bg-base-200' : ''}`}
           onClick={() => hasChildren && toggleRow(item.id)}
         >
           {leafColumns.map((column, columnIndex) => {
@@ -115,7 +113,30 @@ const DataTreeTable = <T extends { id: string | number }>({
                 ? String(item[column.accessorKey] ?? '')
                 : '';
 
-            return (
+            return columnIndex === 0 ? (
+              <th
+                className={
+                  column.setCellClassName && column.accessorKey
+                    ? column.setCellClassName(item[column.accessorKey], item as T)
+                    : ''
+                }
+                key={String(column.accessorKey)}
+                style={{ paddingLeft: `${columnIndex === 0 ? level * 20 + 10 : 10}px` }}
+              >
+                <div className="flex items-center">
+                  {columnIndex === 0 && hasChildren && (
+                    <span className="mr-2">
+                      {isExpanded ? (
+                        <ChevronDown className="size-3" />
+                      ) : (
+                        <ChevronRight className="size-3" />
+                      )}
+                    </span>
+                  )}
+                  {cellContent}
+                </div>
+              </th>
+            ) : (
               <td
                 className={
                   column.setCellClassName && column.accessorKey
@@ -149,11 +170,11 @@ const DataTreeTable = <T extends { id: string | number }>({
   };
 
   return (
-    <div className="h-100 overflow-x-auto shadow bg-base-100 rounded-lg">
-      <table className="table table-sm table-pin-rows table-pin-cols">
-        <thead className="text-center bg-base-300">
+    <div className="h-100 overflow-x-auto shadow rounded-sm">
+      <table className="table-compact">
+        <thead>
           {headerRows.map((row, rowIndex) => (
-            <tr key={rowIndex} className="bg-base-300">
+            <tr key={rowIndex}>
               {row.map((col, colIndex) => {
                 const isGroup = !!col.columns;
                 const colSpan = getColSpan(col);

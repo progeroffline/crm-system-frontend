@@ -6,6 +6,7 @@ export interface DataTableColumnDefinition<T> {
   accessorKey?: keyof T;
   columns?: DataTableColumnDefinition<T>[];
   setCellClassName?: (value: T[keyof T], row: T) => string;
+  asTh?: boolean;
 }
 
 export interface DataTableProps<T> {
@@ -87,11 +88,11 @@ const DataTable = <T extends { id: string | number }>({
   buildHeaderRows(columns, 0);
 
   return (
-    <div className="min-h-150 overflow-x-auto scrollbar-hide shadow bg-base-100 ">
-      <table className="table min-w-600 table-xs table-bordered table-pin-rows table-pin-cols">
-        <thead className="text-center bg-base-200">
+    <div className="max-h-200 overflow-x-auto scrollbar-hide shadow rounded-xs">
+      <table className="table-compact">
+        <thead>
           {headerRows.map((row, rowIndex) => (
-            <tr key={rowIndex} className="bg-base-300">
+            <tr key={rowIndex}>
               {row.map((col, colIndex) => {
                 const isGroup = !!col.columns;
                 const colSpan = getColSpan(col);
@@ -113,25 +114,38 @@ const DataTable = <T extends { id: string | number }>({
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr className="group transition-all hover:brightness-120" key={item.id}>
-              {leafColumns.map((column) => (
-                <td
-                  className={mergeClassNames([
-                    column.setCellClassName && column.accessorKey
-                      ? column.setCellClassName(item[column.accessorKey], item)
-                      : '',
-                  ])}
-                  key={String(column.accessorKey)}
-                >
-                  {column.accessorKey ? formatCell(item[column.accessorKey]) : ''}
-                </td>
-              ))}
+            <tr key={item.id}>
+              {leafColumns.map((column) =>
+                column.asTh ? (
+                  <th
+                    className={mergeClassNames([
+                      column.setCellClassName && column.accessorKey
+                        ? column.setCellClassName(item[column.accessorKey], item)
+                        : '',
+                    ])}
+                    key={String(column.accessorKey)}
+                  >
+                    {column.accessorKey ? formatCell(item[column.accessorKey]) : ''}
+                  </th>
+                ) : (
+                  <td
+                    className={mergeClassNames([
+                      column.setCellClassName && column.accessorKey
+                        ? column.setCellClassName(item[column.accessorKey], item)
+                        : '',
+                    ])}
+                    key={String(column.accessorKey)}
+                  >
+                    {column.accessorKey ? formatCell(item[column.accessorKey]) : ''}
+                  </td>
+                )
+              )}
             </tr>
           ))}
         </tbody>
         {footerData && (
           <tfoot>
-            <tr className="bg-base-300 font-bold text-center">
+            <tr>
               {leafColumns.map((column, index) => {
                 if (index === 0) {
                   return <th key="footer-title">Итого</th>;

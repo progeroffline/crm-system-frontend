@@ -40,7 +40,7 @@ interface MonthDailySalary {
 
 const monthDailySalaries: MonthDailySalary[] = monthDailySalariesJson;
 
-const MonthDailySalaryTable: React.FC = () => {
+const MonthDailySalaryWithTimeShiftTable: React.FC = () => {
   const monthDailySalariesColumns = (
     daysInMonth: number,
     startingDayOfWeek: number
@@ -49,6 +49,7 @@ const MonthDailySalaryTable: React.FC = () => {
       {
         accessorKey: 'operatorName',
         header: 'Оператор',
+        className: 'min-w-32',
         setCellClassName: (): string => 'font-bold',
         asTh: true,
       },
@@ -103,4 +104,4 @@ const MonthDailySalaryTable: React.FC = () => {
   );
 };
 
-export default MonthDailySalaryTable;
+export default MonthDailySalaryWithTimeShiftTable;

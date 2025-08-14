@@ -6,6 +6,7 @@ import SearchInputField from '@/components/molecules/inputs/Search';
 import MonthDailySalaryTable from '@/components/templates/tables/MonthDailySalary';
 import MonthDailyBalanceTable from '@/components/templates/tables/MonthDailyBalance';
 import DateRangePickerField from '@/components/organisms/DateRangePicker';
+import MonthDailySalaryWithTimeShiftTable from '@/components/templates/tables/MonthDailySalaryWithTimeShift';
 
 const Statistics: React.FC = () => {
   const suggestions: string[] = [
@@ -64,7 +65,7 @@ const Statistics: React.FC = () => {
       <div className="mt-4">
         <div className="text-center">
           <span className="text-xl font-bold">Балансы</span>
-          <MonthDailyBalanceTable></MonthDailyBalanceTable>
+          <MonthDailyBalanceTable />
         </div>
         <div className="mt-4 text-center">
           <span className="text-xl font-bold">Статистика</span>
@@ -97,7 +98,7 @@ const Statistics: React.FC = () => {
               defaultChecked
             />
             <div className="tab-content bg-base-100 border-base-300 p-6">
-              <MonthDailySalaryTable></MonthDailySalaryTable>
+              <MonthDailySalaryWithTimeShiftTable></MonthDailySalaryWithTimeShiftTable>
             </div>
           </div>
         </div>
