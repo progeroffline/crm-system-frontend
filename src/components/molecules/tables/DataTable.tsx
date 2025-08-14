@@ -2,6 +2,7 @@ import { mergeClassNames } from '@/lib/utils';
 
 export interface DataTableColumnDefinition<T> {
   header: string;
+  className?: string;
   accessorKey?: keyof T;
   columns?: DataTableColumnDefinition<T>[];
   setCellClassName?: (value: T[keyof T], row: T) => string;
@@ -48,6 +49,22 @@ const DataTable = <T extends { id: string | number }>({
 
   const headerRows: DataTableColumnDefinition<T>[][] = [];
 
+  const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
+
+  const formatCell = (value: number | string | Partial<T>[keyof T]) => {
+    if (typeof value === 'number') {
+      return currencyFormatter.format(value);
+    }
+    if (value === null) {
+      return currencyFormatter.format(0);
+    }
+    return String(value ?? '');
+  };
+
   const getColSpan = (col: DataTableColumnDefinition<T>) =>
     col.columns ? getLeafColumns(col.columns).length : 1;
 
@@ -81,7 +98,12 @@ const DataTable = <T extends { id: string | number }>({
                 const rowSpan = !isGroup ? maxDepth - rowIndex : 1;
 
                 return (
-                  <th key={colIndex} colSpan={colSpan} rowSpan={rowSpan}>
+                  <th
+                    key={colIndex}
+                    colSpan={colSpan}
+                    rowSpan={rowSpan}
+                    className={mergeClassNames([col.className ?? ''])}
+                  >
                     {col.header}
                   </th>
                 );
@@ -95,13 +117,14 @@ const DataTable = <T extends { id: string | number }>({
               {leafColumns.map((column) => (
                 <td
                   className={mergeClassNames([
+                    'whitespace-nowrap',
                     column.setCellClassName && column.accessorKey
                       ? column.setCellClassName(item[column.accessorKey], item)
                       : '',
                   ])}
                   key={String(column.accessorKey)}
                 >
-                  {column.accessorKey ? String(item[column.accessorKey] ?? '') : ''}
+                  {column.accessorKey ? formatCell(item[column.accessorKey]) : ''}
                 </td>
               ))}
             </tr>
@@ -116,8 +139,16 @@ const DataTable = <T extends { id: string | number }>({
                 }
                 const value = column.accessorKey ? footerData[column.accessorKey] : null;
                 return (
-                  <td key={`footer-${String(column.accessorKey)}`}>
-                    {value != null ? String(value) : ''}
+                  <td
+                    className={mergeClassNames([
+                      'whitespace-nowrap',
+                      column.setCellClassName && column.accessorKey
+                        ? column.setCellClassName(value as T[keyof T], footerData as T)
+                        : '',
+                    ])}
+                    key={`footer-${String(column.accessorKey)}`}
+                  >
+                    {value ? formatCell(value) : ''}
                   </td>
                 );
               })}

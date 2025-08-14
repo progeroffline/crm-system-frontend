@@ -63,7 +63,8 @@ const MonthDailySalaryTable: React.FC = () => {
           {
             accessorKey: `dayNumber_${i}` as keyof MonthDailySalary,
             header: `${i}`,
-            setCellClassName: (value: number | string | null, _: MonthDailySalary): string =>
+            className: 'w-16',
+            setCellClassName: (value: string | number | null, _: MonthDailySalary): string =>
               colorizeCellByValue(value),
           },
         ],
@@ -82,7 +83,9 @@ const MonthDailySalaryTable: React.FC = () => {
         const value = currentRow[dayKey];
         return sum + (typeof value === 'number' ? value : 0);
       }, 0);
-      totals[dayKey] = totalForDay.toFixed(2);
+
+      // @ts-expect-error Key 100% exists
+      totals[dayKey] = totalForDay;
     }
 
     return totals;
