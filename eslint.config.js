@@ -6,13 +6,23 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   {
+    ignores: ['dist/**'],
+  },
+  {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     plugins: { js },
     extends: ['js/recommended'],
   },
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    languageOptions: { globals: globals.browser },
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        process: 'readonly',
+        'calendar-range': 'readonly',
+        'calendar-month': 'readonly',
+      },
+    },
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -24,7 +34,7 @@ export default defineConfig([
       ],
     },
   },
-  ...tseslint.configs.recommended,
+  ...tseslint.configs.strict,
   {
     files: ['**/*.{jsx,tsx}'],
     ...pluginReact.configs.flat.recommended,

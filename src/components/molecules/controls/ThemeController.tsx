@@ -1,6 +1,6 @@
 import { HTMLProps, useEffect, useState } from 'react';
-import MoonIcon from '../icons/Moon';
-import SunIcon from '../icons/Sun';
+import MoonIcon from '../../atoms/icons/Moon';
+import SunIcon from '../../atoms/icons/Sun';
 
 const defaultClasses = ['swap', 'swap-rotate'];
 

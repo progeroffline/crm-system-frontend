@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import EyeIcon from '../icons/Eye';
-import KeyIcon from '../icons/Key';
+import EyeIcon from '../../atoms/icons/Eye';
+import KeyIcon from '../../atoms/icons/Key';
 import InputFieldProps from './DefaultProps';
 
 const PasswordInputField: React.FC<InputFieldProps> = ({

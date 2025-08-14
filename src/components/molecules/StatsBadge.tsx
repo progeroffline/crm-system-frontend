@@ -2,7 +2,7 @@ import { mergeClassNames } from '@/lib/utils';
 import { ClassValue } from 'clsx';
 import { JSX } from 'react';
 
-interface StatsProps {
+interface StatsBadgeProps {
   className?: ClassValue;
   icon?: JSX.Element;
   title?: string;
@@ -11,7 +11,7 @@ interface StatsProps {
   description?: string;
 }
 
-const Stats: React.FC<StatsProps> = ({
+const StatsBage: React.FC<StatsBadgeProps> = ({
   className,
   icon,
   title,
@@ -39,4 +39,4 @@ const Stats: React.FC<StatsProps> = ({
   );
 };
 
-export default Stats;
+export default StatsBage;

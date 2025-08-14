@@ -1,12 +1,16 @@
+import { mergeClassNames } from '@/lib/utils';
+
 export interface DataTableColumnDefinition<T> {
   header: string;
   accessorKey?: keyof T;
   columns?: DataTableColumnDefinition<T>[];
+  setCellClassName?: (value: T[keyof T], row: T) => string;
 }
 
 export interface DataTableProps<T> {
   columns: DataTableColumnDefinition<T>[];
   data: T[];
+  footerData?: Partial<T>;
 }
 
 function getLeafColumns<T>(columns: DataTableColumnDefinition<T>[]) {
@@ -34,9 +38,10 @@ function getMaxDepth<T>(columns: DataTableColumnDefinition<T>[]): number {
   return maxDepth;
 }
 
-const DataTable = <T extends { id?: string | number }>({
+const DataTable = <T extends { id: string | number }>({
   columns,
   data,
+  footerData,
 }: DataTableProps<T>): React.ReactElement => {
   const leafColumns = getLeafColumns(columns);
   const maxDepth = getMaxDepth(columns);
@@ -65,11 +70,11 @@ const DataTable = <T extends { id?: string | number }>({
   buildHeaderRows(columns, 0);
 
   return (
-    <div className="h-100 overflow-x-auto rounded-box border border-base-content/5 bg-base-200">
+    <div className="h-100 overflow-x-auto shadow bg-base-100 ">
       <table className="table table-xs table-bordered table-pin-rows table-pin-cols">
-        <thead>
+        <thead className="text-center bg-base-200">
           {headerRows.map((row, rowIndex) => (
-            <tr key={rowIndex}>
+            <tr key={rowIndex} className="bg-base-300">
               {row.map((col, colIndex) => {
                 const isGroup = !!col.columns;
                 const colSpan = getColSpan(col);
@@ -85,17 +90,42 @@ const DataTable = <T extends { id?: string | number }>({
           ))}
         </thead>
         <tbody>
-          {data.map((item, index) => (
-            <tr key={item.id ?? index}>
+          {data.map((item) => (
+            <tr className="group transition-all hover:brightness-120" key={item.id}>
               {leafColumns.map((column) => (
-                <td key={String(column.accessorKey)}>{String(item[column.accessorKey!] ?? '')}</td>
+                <td
+                  className={mergeClassNames([
+                    column.setCellClassName && column.accessorKey
+                      ? column.setCellClassName(item[column.accessorKey], item)
+                      : '',
+                  ])}
+                  key={String(column.accessorKey)}
+                >
+                  {column.accessorKey ? String(item[column.accessorKey] ?? '') : ''}
+                </td>
               ))}
             </tr>
           ))}
         </tbody>
+        {footerData && (
+          <tfoot>
+            <tr className="bg-base-300 font-bold text-center">
+              {leafColumns.map((column, index) => {
+                if (index === 0) {
+                  return <th key="footer-title">Итого</th>;
+                }
+                const value = column.accessorKey ? footerData[column.accessorKey] : null;
+                return (
+                  <td key={`footer-${String(column.accessorKey)}`}>
+                    {value != null ? String(value) : ''}
+                  </td>
+                );
+              })}
+            </tr>
+          </tfoot>
+        )}
       </table>
     </div>
   );
 };
-
 export default DataTable;

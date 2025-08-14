@@ -1,4 +1,4 @@
-import UserIcon from '../icons/User';
+import UserIcon from '../../atoms/icons/User';
 import InputFieldProps from './DefaultProps';
 
 const UsernameInputField: React.FC<InputFieldProps> = ({

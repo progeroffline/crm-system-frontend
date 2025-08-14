@@ -1,4 +1,4 @@
-import IconProps, { generalIconProps } from '@/components/icons/DefaultProps';
+import IconProps, { generalIconProps } from './DefaultProps';
 import { mergeClassNames } from '@/lib/utils';
 
 const EyeIcon: React.FC<IconProps> = ({ className, ...props }) => {

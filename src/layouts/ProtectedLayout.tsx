@@ -1,9 +1,9 @@
-import NavigationBar from '@/components/complex/NavigationBar';
+import NavigationBar from '@/components/organisms/NavigationBar';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useState } from 'react';
-import ChartPie from '@/components/icons/ChartPie';
-import SideBar from '@/components/complex/SideBar';
+import ChartPie from '@/components/atoms/icons/ChartPie';
+import SideBar from '@/components/organisms/SideBar';
 
 const ProtectedLayout = () => {
   const { isAuthenticated } = useAuth();
@@ -21,7 +21,7 @@ const ProtectedLayout = () => {
     <div className="flex h-screen">
       <SideBar
         isCollapsed={isSidebarCollapsed}
-        items={[{ path: '/', label: 'Statistics', icon: <ChartPie /> }]}
+        items={[{ path: '/', label: 'Статистика', icon: <ChartPie /> }]}
       />
       <div className="flex-1 flex flex-col overflow-hidden">
         <NavigationBar onToggleSidebar={toggleSidebar} />

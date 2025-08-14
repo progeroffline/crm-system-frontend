@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import ThemeControls from '../controls/ThemeController';
+import ThemeControls from '../molecules/controls/ThemeController';
 import { useAuth } from '@/contexts/AuthContext';
-import ExitIcon from '../icons/Exit';
-import CrossIcon from '../icons/Cross';
-import UserIcon from '../icons/User';
-import SettingsIcon from '../icons/Settings';
+import ExitIcon from '../atoms/icons/Exit';
+import CrossIcon from '../atoms/icons/Cross';
+import UserIcon from '../atoms/icons/User';
+import SettingsIcon from '../atoms/icons/Settings';
 import { useRef } from 'react';
-import MenuIcon from '../icons/MenuIcon';
+import MenuIcon from '../atoms/icons/MenuIcon';
 
 interface NavigationBarProps {
   onToggleSidebar: () => void;
@@ -39,7 +39,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ onToggleSidebar }) => {
       <div className="mr-2">
         <ThemeControls />
       </div>
-      <div className="mr-3">
+      <div className="mr-3 z-2">
         <div className="drawer drawer-end">
           <input
             id="account-drawer"

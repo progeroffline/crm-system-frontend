@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
-import LogotypeImage from '../branding/LogotypeImage';
-import LogotypeLabel from '../branding/Logotype';
+import LogotypeImage from '../atoms/branding/LogotypeImage';
+import LogotypeLabel from '../atoms/branding/Logotype';
 import { JSX } from 'react';
 
 interface SidebarItemProps {
