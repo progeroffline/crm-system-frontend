@@ -87,8 +87,8 @@ const DataTable = <T extends { id: string | number }>({
   buildHeaderRows(columns, 0);
 
   return (
-    <div className="h-100 overflow-x-auto shadow bg-base-100 ">
-      <table className="table table-xs table-bordered table-pin-rows table-pin-cols">
+    <div className="min-h-150 overflow-x-auto scrollbar-hide shadow bg-base-100 ">
+      <table className="table min-w-600 table-xs table-bordered table-pin-rows table-pin-cols">
         <thead className="text-center bg-base-200">
           {headerRows.map((row, rowIndex) => (
             <tr key={rowIndex} className="bg-base-300">
@@ -117,7 +117,6 @@ const DataTable = <T extends { id: string | number }>({
               {leafColumns.map((column) => (
                 <td
                   className={mergeClassNames([
-                    'whitespace-nowrap',
                     column.setCellClassName && column.accessorKey
                       ? column.setCellClassName(item[column.accessorKey], item)
                       : '',
@@ -139,15 +138,7 @@ const DataTable = <T extends { id: string | number }>({
                 }
                 const value = column.accessorKey ? footerData[column.accessorKey] : null;
                 return (
-                  <td
-                    className={mergeClassNames([
-                      'whitespace-nowrap',
-                      column.setCellClassName && column.accessorKey
-                        ? column.setCellClassName(value as T[keyof T], footerData as T)
-                        : '',
-                    ])}
-                    key={`footer-${String(column.accessorKey)}`}
-                  >
+                  <td key={`footer-${String(column.accessorKey)}`}>
                     {value ? formatCell(value) : ''}
                   </td>
                 );

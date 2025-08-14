@@ -49,6 +49,7 @@ const MonthDailySalaryTable: React.FC = () => {
       {
         accessorKey: 'operatorName',
         header: 'Оператор',
+        className: 'min-w-32',
         setCellClassName: (): string => 'font-bold',
       },
     ];
@@ -63,7 +64,7 @@ const MonthDailySalaryTable: React.FC = () => {
           {
             accessorKey: `dayNumber_${i}` as keyof MonthDailySalary,
             header: `${i}`,
-            className: 'w-16',
+            className: '',
             setCellClassName: (value: string | number | null, _: MonthDailySalary): string =>
               colorizeCellByValue(value),
           },
