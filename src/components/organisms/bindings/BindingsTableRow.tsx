@@ -1,7 +1,4 @@
-// src/components/organisms/bindings/BindingsTableRow.tsx
-import React from 'react';
 import Pencil from '../../atoms/icons/Pencil';
-import Trash from '../../atoms/icons/Trash';
 import { AssignedModel } from '../../../types/model';
 
 interface BindingsTableRowProps {
@@ -18,28 +15,27 @@ const statusColors: Record<string, string> = {
   удалена: 'badge-neutral',
 };
 
-const BooleanDisplay: React.FC<{ value: boolean }> = ({ value }) =>
-  value ? (
-    <div className="lg:tooltip" data-tip="Server is down">
-      <div className="inline-grid *:[grid-area:1/1]">
-        <div className="status status-lg status-error animate-ping"></div>
-        <div className="status status-lg status-error"></div>
-      </div>
+const BooleanDisplay: React.FC<{ value: boolean }> = ({ value }) => (
+  <div
+    className="flex flex-row justify-center align-center items-center lg:tooltip"
+    style={{
+      display: 'flex',
+    }}
+    data-tip={value ? 'Работает' : 'Не работает'}
+  >
+    <div className="inline-grid *:[grid-area:1/1]">
+      <div
+        className={`status status-lg animate-ping ${value ? 'status-success' : 'status-error'}`}
+      ></div>
+      <div className={`status status-lg ${value ? 'status-success' : 'status-error'}`}></div>
     </div>
-  ) : (
-    <div className="lg:tooltip" data-tip="Working normally">
-      <div className="inline-grid *:[grid-area:1/1]">
-        <div className="status status-lg status-success animate-ping"></div>
-        <div className="status status-lg status-success"></div>
-      </div>
-    </div>
-  );
+  </div>
+);
 
 const BindingsTableRow: React.FC<BindingsTableRowProps> = ({
   model,
   isEditingOrAdding,
   onEdit,
-  onDelete,
 }) => {
   return (
     <tr className="hover:bg-base-300">
@@ -59,26 +55,21 @@ const BindingsTableRow: React.FC<BindingsTableRowProps> = ({
       <td>{model.superAdmin || '---'}</td>
       <td>{model.topAdmin || '---'}</td>
       <td>
-        <span className={`badge ${statusColors[model.status]}`}>{model.status}</span>
+        <span className={`badge w-full ${statusColors[model.status]}`}>{model.status}</span>
       </td>
       <td>
         <BooleanDisplay value={model.mailing} />
       </td>
-      <td className="flex flex-col gap-1">
-        <button
-          className="btn btn-info btn-xs"
-          onClick={() => onEdit(model)}
-          disabled={isEditingOrAdding}
-        >
-          <Pencil className="h-4 w-4" />
-        </button>
-        <button
-          className="btn btn-error btn-xs"
-          onClick={() => onDelete(model.id)}
-          disabled={isEditingOrAdding}
-        >
-          <Trash className="h-4 w-4" />
-        </button>
+      <td>
+        <div className="flex flex-row items-center justify-center">
+          <button
+            className="btn btn-info btn-xs w-full"
+            onClick={() => onEdit(model)}
+            disabled={isEditingOrAdding}
+          >
+            <Pencil className="h-4 w-4" />
+          </button>
+        </div>
       </td>
     </tr>
   );

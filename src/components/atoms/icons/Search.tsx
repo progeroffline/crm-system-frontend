@@ -1,4 +1,3 @@
-import React from 'react';
 import BaseIcon from './DefaultProps';
 
 const SearchIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {

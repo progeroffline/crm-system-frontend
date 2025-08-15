@@ -1,4 +1,3 @@
-import React from 'react';
 import BaseIcon from './DefaultProps';
 
 const ChevronLeftIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {

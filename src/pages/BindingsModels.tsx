@@ -1,4 +1,3 @@
-import React from 'react';
 import BindingsModelsTable from '../components/organisms/bindings/BindingsModelsTable';
 import { generateFakeAssignedModelsData } from '../components/templates/tables/generateFakeData';
 

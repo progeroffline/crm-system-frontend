@@ -1,5 +1,3 @@
-// src/components/organisms/bindings/BindingsModelsTable.tsx
-import React from 'react';
 import { useAssignedModelsManager } from '../../../hooks/useAssignedModelsManager';
 import { AssignedModel } from '../../../types/model';
 import BindingsTableRow from './BindingsTableRow';

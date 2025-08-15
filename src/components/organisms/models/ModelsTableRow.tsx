@@ -1,4 +1,3 @@
-import React from 'react';
 import Pencil from '../../atoms/icons/Pencil';
 import Trash from '../../atoms/icons/Trash';
 import { Model } from '../../../types/model';

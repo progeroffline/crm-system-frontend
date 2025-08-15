@@ -1,4 +1,3 @@
-import React from 'react';
 import { mergeClassNames } from '../../../lib/utils';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {

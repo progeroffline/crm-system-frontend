@@ -1,5 +1,3 @@
-// src/components/organisms/bindings/BindingsTableFormRow.tsx
-import React from 'react';
 import { AssignedModel } from '../../../types/model';
 import { superAdmins, topAdmins, admins, operators } from '../../templates/tables/generateFakeData';
 
@@ -78,28 +76,6 @@ const BindingsTableFormRow: React.FC<BindingsTableFormRowProps> = ({
         />
       </td>
       <td>
-        <select
-          name="status"
-          className="select select-bordered select-sm w-full"
-          value={record.status}
-          onChange={handleInputChange}
-        >
-          <option>работает</option>
-          <option>ушла</option>
-          <option>блок</option>
-          <option>удалена</option>
-        </select>
-      </td>
-      <td>
-        <input
-          type="checkbox"
-          name="mailing"
-          className="checkbox checkbox-sm"
-          checked={record.mailing}
-          onChange={handleCheckboxChange}
-        />
-      </td>
-      <td>
         <input
           type="number"
           name="total"
@@ -128,6 +104,23 @@ const BindingsTableFormRow: React.FC<BindingsTableFormRowProps> = ({
           onChange={handleInputChange}
         />
       </td>
+
+      <td>
+        <AdminSelect
+          name="operator"
+          value={record.operator}
+          onChange={handleInputChange}
+          options={operators}
+        />
+      </td>
+      <td>
+        <AdminSelect
+          name="admin"
+          value={record.admin}
+          onChange={handleInputChange}
+          options={admins}
+        />
+      </td>
       <td>
         <AdminSelect
           name="superAdmin"
@@ -145,19 +138,25 @@ const BindingsTableFormRow: React.FC<BindingsTableFormRowProps> = ({
         />
       </td>
       <td>
-        <AdminSelect
-          name="admin"
-          value={record.admin}
+        <select
+          name="status"
+          className="select select-bordered select-sm w-full"
+          value={record.status}
           onChange={handleInputChange}
-          options={admins}
-        />
+        >
+          <option>работает</option>
+          <option>ушла</option>
+          <option>блок</option>
+          <option>удалена</option>
+        </select>
       </td>
       <td>
-        <AdminSelect
-          name="operator"
-          value={record.operator}
-          onChange={handleInputChange}
-          options={operators}
+        <input
+          type="checkbox"
+          name="mailing"
+          className="checkbox checkbox-sm"
+          checked={record.mailing}
+          onChange={handleCheckboxChange}
         />
       </td>
       <td className="flex flex-col items-center gap-2">

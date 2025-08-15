@@ -1,4 +1,3 @@
-import React from 'react';
 import { useModelsManager } from '../../../hooks/useModelsManager';
 import { Model } from '../../../types/model';
 import ModelsTableRow from './ModelsTableRow';
