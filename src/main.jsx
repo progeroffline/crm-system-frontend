@@ -8,11 +8,12 @@ import Signup from './pages/Signup';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedLayout from './layouts/ProtectedLayout';
 import GuestLayout from './layouts/GuestLayout';
-import Profile from './pages/Profile';
-import Statistics from './pages/Statistics';
-import Models from './pages/Models';
-import Settings from './pages/Settings';
-import BindingsModels from './pages/BindingsModels';
+import { appRoutes } from './routes';
+
+const protectedRoutes = appRoutes.map((route) => ({
+  path: route.path,
+  element: route.element,
+}));
 
 const router = createBrowserRouter([
   {
@@ -34,28 +35,7 @@ const router = createBrowserRouter([
       },
       {
         element: <ProtectedLayout />,
-        children: [
-          {
-            path: '/',
-            element: <Statistics />,
-          },
-          {
-            path: '/models',
-            element: <Models />,
-          },
-          {
-            path: '/models/bindings',
-            element: <BindingsModels />,
-          },
-          {
-            path: '/profile',
-            element: <Profile />,
-          },
-          {
-            path: '/settings',
-            element: <Settings />,
-          },
-        ],
+        children: protectedRoutes,
       },
     ],
   },

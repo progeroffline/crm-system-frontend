@@ -1,10 +1,5 @@
-// src/hooks/useAssignedModelsManager.ts
-
 import { useState } from 'react';
 import { AssignedModel } from '../types/model';
-import { superAdmins, topAdmins, admins, operators } from '../components/templates/tables/generateFakeData';
-
-const getRandomElement = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
 const NEW_ASSIGNED_MODEL_TEMPLATE: AssignedModel = {
   id: null,
@@ -32,7 +27,10 @@ export const useAssignedModelsManager = (initialModels: AssignedModel[]) => {
 
   const handleAdd = () => {
     const randomImgId = Math.floor(Math.random() * 70) + 1;
-    setNewModel({ ...NEW_ASSIGNED_MODEL_TEMPLATE, avatar: `https://i.pravatar.cc/150?img=${randomImgId}` });
+    setNewModel({
+      ...NEW_ASSIGNED_MODEL_TEMPLATE,
+      avatar: `https://i.pravatar.cc/150?img=${randomImgId}`,
+    });
   };
 
   const handleCancelAdd = () => setNewModel(null);

@@ -121,53 +121,81 @@ export function generateYearDailySalaries(
   return data;
 }
 
-import { Model, Status, AssignedModel } from '../../../types/model';
+// =================================================================
+// CRM TABLES DATA
+// =================================================================
 
-// --- Data for ModelsTable ---
-const firstNames = ['Мария', 'Анна', 'Екатерина', 'Ольга', 'София', 'Виктория', 'Алиса'];
-const lastNames = [
-  'Иванова',
-  'Петрова',
-  'Смирнова',
-  'Кузнецова',
-  'Попова',
-  'Васильева',
-  'Соколова',
-];
-const patronymics = [
-  'Сергеевна',
-  'Андреевна',
-  'Алексеевна',
-  'Дмитриевна',
-  'Максимовна',
-  'Ивановна',
-];
-const statuses: Status[] = ['работает', 'ушла', 'блок', 'удалена'];
-const notReadyOptions = ['Экстрим', 'Скат', 'Насилие', 'Анал', 'Ступни', 'Моча', ''];
-const sexToysOptions = [
-  'Дилдо',
-  'Вибратор',
-  'Анальная пробка',
-  'Вибромассажер',
-  'Все виды',
-  'Нет',
-  'Стеклянный дилдо',
-];
+import {
+  Model,
+  Status,
+  AssignedModel,
+  MarketingModel,
+  MarketingStatus,
+  StaffRatingModel,
+  StaffRole,
+} from '../../../types/model';
+
+// =================================================================
+// DATA POOLS
+// =================================================================
+
+export const dataPools = {
+  firstNames: ['Мария', 'Анна', 'Екатерина', 'Ольга', 'София', 'Виктория', 'Алиса'],
+  lastNames: ['Иванова', 'Петрова', 'Смирнова', 'Кузнецова', 'Попова', 'Васильева', 'Соколова'],
+  patronymics: ['Сергеевна', 'Андреевна', 'Алексеевна', 'Дмитриевна', 'Максимовна', 'Ивановна'],
+
+  superAdmins: ['Иван Грозный', 'Екатерина Великая'],
+  topAdmins: ['Александр Суворов', 'Михаил Кутузов', 'Георгий Жуков'],
+  admins: ['Петр I', 'Николай II', 'Александр III'],
+  operators: ['Юрий Гагарин', 'Валентина Терешкова', 'Герман Титов', 'Алексей Леонов'],
+  marketingAdmins: ['Маркетолог-1', 'Маркетолог-2'],
+
+  locations: ['Киев', 'Варшава', 'Лиссабон', 'Тбилиси'],
+  trafficSources: ['Facebook', 'Instagram', 'TikTok', 'BongaCams'],
+  sources: ['Реклама', 'Сарафан', 'Партнерка'],
+  reasonsForLeaving: ['Проф. выгорание', 'Переезд', 'Личные причины', null],
+
+  statuses: {
+    model: ['работает', 'ушла', 'блок', 'удалена'] as Status[],
+    marketing: ['работает', 'уволен', 'отдыхает', 'болеет'] as MarketingStatus[],
+  },
+
+  questionnaire: {
+    notReadyOptions: ['Экстрим', 'Скат', 'Насилие', 'Анал', 'Ступни', 'Моча', ''],
+    sexToysOptions: [
+      'Дилдо',
+      'Вибратор',
+      'Анальная пробка',
+      'Вибромассажер',
+      'Все виды',
+      'Нет',
+      'Стеклянный дилдо',
+    ],
+  },
+};
+
+// =================================================================
+// BASE GENERATORS
+// =================================================================
 
 const getRandomElement = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 const getRandomBoolean = (): boolean => Math.random() > 0.5;
 const getRandomId = (): number => new Date().getTime() + Math.random();
 
+const generateSinglePerson = () => ({
+  id: getRandomId(),
+  fullName: `${getRandomElement(dataPools.lastNames)} ${getRandomElement(dataPools.firstNames)} ${getRandomElement(dataPools.patronymics)}`,
+});
+
 const generateSingleFakeModel = (): Model => {
-  const fullName = `${getRandomElement(lastNames)} ${getRandomElement(firstNames)} ${getRandomElement(patronymics)}`;
+  const person = generateSinglePerson();
   const randomImgId = Math.floor(Math.random() * 70) + 1;
 
   return {
-    id: getRandomId(),
+    ...person,
     avatar: `https://i.pravatar.cc/150?img=${randomImgId}`,
-    fullName,
-    ml: `ML-${Math.floor(Math.random() * 90000) + 10000}`,
-    status: getRandomElement(statuses),
+    ml: `ML-${getRandomInt(10000, 99999)}`,
+    status: getRandomElement(dataPools.statuses.model),
     mailing: getRandomBoolean(),
     questionnaire: {
       vaginalMasturbationToys: getRandomBoolean(),
@@ -181,45 +209,165 @@ const generateSingleFakeModel = (): Model => {
       peeVideo: getRandomBoolean(),
       periodVideo: getRandomBoolean(),
       minEnglish: getRandomBoolean(),
-      notReadyFor: getRandomElement(notReadyOptions),
-      sexToys: getRandomElement(sexToysOptions),
+      notReadyFor: getRandomElement(dataPools.questionnaire.notReadyOptions),
+      sexToys: getRandomElement(dataPools.questionnaire.sexToysOptions),
       customs: getRandomBoolean(),
       videoCalls: getRandomBoolean(),
     },
   };
 };
 
+// =================================================================
+// EXPORTED GENERATORS
+// =================================================================
+
+/** Generates data for the main Models table */
 export const generateFakeModelsData = (count: number): Model[] => {
   return Array.from({ length: count }, generateSingleFakeModel);
 };
 
-// --- Data for BindingsModelsTable ---
-export const superAdmins = ['Иван Грозный', 'Екатерина Великая'];
-export const topAdmins = ['Александр Суворов', 'Михаил Кутузов', 'Георгий Жуков'];
-export const admins = ['Петр I', 'Николай II', 'Александр III'];
-export const operators = ['Юрий Гагарин', 'Валентина Терешкова', 'Герман Титов', 'Алексей Леонов'];
+/** Generates data for the Bindings (Assigned Models) table */
+export const generateFakeAssignedModelsData = (count: number): AssignedModel[] => {
+  return Array.from({ length: count }, () => {
+    const baseModel = generateSingleFakeModel();
+    const registrationDate = new Date(Date.now() - getRandomInt(0, 365) * 24 * 60 * 60 * 1000);
+    return {
+      ...baseModel,
+      questionnaire: undefined, // remove questionnaire
+      total: getRandomInt(0, 5000),
+      forecast: getRandomInt(0, 8000),
+      registrationDate: registrationDate.toISOString().split('T')[0],
+      superAdmin: getRandomElement([...dataPools.superAdmins, null]),
+      topAdmin: getRandomElement([...dataPools.topAdmins, null]),
+      admin: getRandomElement([...dataPools.admins, null]),
+      operator: getRandomElement([...dataPools.operators, null]),
+    };
+  });
+};
 
-const generateSingleAssignedModel = (): AssignedModel => {
-  const baseModel = generateSingleFakeModel();
-  const registrationDate = new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000);
+/** Generates data for the Marketing table */
+export const generateFakeMarketingData = (count: number): MarketingModel[] => {
+  const operatorsForReferral = Array.from({ length: 10 }, () => ({
+    fullName: `${getRandomElement(dataPools.lastNames)} ${getRandomElement(dataPools.firstNames)}`,
+    id: getRandomId(),
+  }));
+
+  return Array.from({ length: count }, () => {
+    const person = generateSinglePerson();
+    const hireDate = new Date(Date.now() - getRandomInt(0, 730) * 24 * 60 * 60 * 1000);
+    const status = getRandomElement(dataPools.statuses.marketing);
+    const fireDate =
+      status === 'уволен'
+        ? new Date(hireDate.getTime() + getRandomInt(1, 365) * 24 * 60 * 60 * 1000)
+        : null;
+
+    return {
+      ...person,
+      status,
+      hireDate: hireDate.toISOString().split('T')[0],
+      fireDate: fireDate ? fireDate.toISOString().split('T')[0] : null,
+      workDays: fireDate
+        ? Math.floor((fireDate.getTime() - hireDate.getTime()) / (1000 * 3600 * 24))
+        : Math.floor((Date.now() - hireDate.getTime()) / (1000 * 3600 * 24)),
+      reasonForLeaving: getRandomElement(dataPools.reasonsForLeaving),
+      contactTelegram: `@${Math.random().toString(36).substring(7)}`,
+      location: getRandomElement(dataPools.locations),
+      trafficSource: getRandomElement(dataPools.trafficSources),
+      source: getRandomElement(dataPools.sources),
+      administrator: getRandomElement(dataPools.marketingAdmins),
+      referral: getRandomBoolean() ? getRandomElement(operatorsForReferral) : null,
+      superTopAdmin: getRandomElement([...dataPools.superAdmins, null]),
+      topAdmin: getRandomElement([...dataPools.topAdmins, null]),
+    };
+  });
+};
+
+/** Generates data for the Staff Ratings table */
+export const generateFakeStaffRatingData = (count: number): StaffRatingModel[] => {
+  const roles: StaffRole[] = ['Супер админ', 'Топ админ', 'Администратор', 'Оператор', 'HR'];
+  const namePool = {
+    'Супер админ': dataPools.superAdmins,
+    'Топ админ': dataPools.topAdmins,
+    Администратор: dataPools.admins,
+    Оператор: dataPools.operators,
+    HR: dataPools.marketingAdmins, // Assuming HRs are from marketing admins pool
+  };
+
+  return Array.from({ length: count }, () => {
+    const role = getRandomElement(roles);
+    return {
+      id: getRandomId(),
+      fullName: getRandomElement(namePool[role]),
+      role,
+      rating: getRandomInt(1, 1000),
+    };
+  });
+};
+
+// --- Data for LeavingsTable ---
+import { LeavingModel, LeavingType } from '../../../types/model';
+
+const translators = ['Переводчик-1', 'Переводчик-2', 'Переводчик-3'];
+const leavingTypes: LeavingType[] = ['По собственному', 'Уволен', 'Перевод'];
+
+const generateSingleLeaving = (): LeavingModel => {
+  const hireDate = new Date(Date.now() - getRandomInt(30, 1000) * 24 * 60 * 60 * 1000);
+  const fireDate = new Date(hireDate.getTime() + getRandomInt(30, 365) * 24 * 60 * 60 * 1000);
+  const workDays = Math.floor((fireDate.getTime() - hireDate.getTime()) / (1000 * 3600 * 24));
+  const balanceCurrent = getRandomInt(0, 500);
+  const balancePrevious = getRandomInt(100, 2000);
+  const balanceWayBack = getRandomInt(100, 2000);
 
   return {
-    id: baseModel.id,
-    avatar: baseModel.avatar,
-    fullName: baseModel.fullName,
-    ml: baseModel.ml,
-    status: baseModel.status,
-    mailing: baseModel.mailing,
-    total: Math.floor(Math.random() * 5000),
-    forecast: Math.floor(Math.random() * 8000),
-    registrationDate: registrationDate.toISOString().split('T')[0],
-    superAdmin: getRandomElement([...superAdmins, null]),
-    topAdmin: getRandomElement([...topAdmins, null]),
-    admin: getRandomElement([...admins, null]),
-    operator: getRandomElement([...operators, null]),
+    id: getRandomId(),
+    fullName: `${getRandomElement(dataPools.lastNames)} ${getRandomElement(dataPools.firstNames)} ${getRandomElement(dataPools.patronymics)}`,
+    hireDate: hireDate.toISOString().split('T')[0],
+    fireDate: fireDate.toISOString().split('T')[0],
+    workDays,
+    leavingType: getRandomElement(leavingTypes),
+    contactTelegram: `@${Math.random().toString(36).substring(7)}`,
+    location: getRandomElement(dataPools.locations),
+    superTopAdmin: getRandomElement([...dataPools.superAdmins, null]),
+    topAdmin: getRandomElement([...dataPools.topAdmins, null]),
+    administrator: getRandomElement([...dataPools.admins, null]),
+    translator: getRandomElement([...translators, null]),
+    balance: {
+      current: balanceCurrent,
+      previous: balancePrevious,
+      позапрошлый: balanceWayBack,
+      total: balanceCurrent + balancePrevious + balanceWayBack,
+    },
   };
 };
 
-export const generateFakeAssignedModelsData = (count: number): AssignedModel[] => {
-  return Array.from({ length: count }, generateSingleAssignedModel);
+export const generateFakeLeavingsData = (count: number): LeavingModel[] => {
+  return Array.from({ length: count }, generateSingleLeaving);
+};
+
+// --- Data for UsersTable ---
+import { UserModel, UserRole } from '../../../types/model';
+
+const userRoles: UserRole[] = [
+  'superAdmin',
+  'topAdmin',
+  'admin',
+  'operator',
+  'hr',
+  'translator',
+  'user',
+];
+
+const generateSingleUser = (): UserModel => {
+  const lastLoginDate = new Date(Date.now() - getRandomInt(0, 30) * 24 * 60 * 60 * 1000);
+  return {
+    id: getRandomId(),
+    username: `${getRandomElement(dataPools.lastNames)}_${getRandomInt(10, 99)}`,
+    role: getRandomElement(userRoles),
+    lastLogin: lastLoginDate.toISOString(),
+    balance: getRandomInt(0, 10000),
+  };
+};
+
+export const generateFakeUsersData = (count: number): UserModel[] => {
+  return Array.from({ length: count }, generateSingleUser);
 };

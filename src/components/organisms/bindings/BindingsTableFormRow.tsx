@@ -1,5 +1,5 @@
 import { AssignedModel } from '../../../types/model';
-import { superAdmins, topAdmins, admins, operators } from '../../templates/tables/generateFakeData';
+import { dataPools } from '../../templates/tables/generateFakeData';
 
 interface BindingsTableFormRowProps {
   record: AssignedModel;
@@ -110,7 +110,7 @@ const BindingsTableFormRow: React.FC<BindingsTableFormRowProps> = ({
           name="operator"
           value={record.operator}
           onChange={handleInputChange}
-          options={operators}
+          options={dataPools.operators}
         />
       </td>
       <td>
@@ -118,7 +118,7 @@ const BindingsTableFormRow: React.FC<BindingsTableFormRowProps> = ({
           name="admin"
           value={record.admin}
           onChange={handleInputChange}
-          options={admins}
+          options={dataPools.admins}
         />
       </td>
       <td>
@@ -126,7 +126,7 @@ const BindingsTableFormRow: React.FC<BindingsTableFormRowProps> = ({
           name="superAdmin"
           value={record.superAdmin}
           onChange={handleInputChange}
-          options={superAdmins}
+          options={dataPools.superAdmins}
         />
       </td>
       <td>
@@ -134,7 +134,7 @@ const BindingsTableFormRow: React.FC<BindingsTableFormRowProps> = ({
           name="topAdmin"
           value={record.topAdmin}
           onChange={handleInputChange}
-          options={topAdmins}
+          options={dataPools.topAdmins}
         />
       </td>
       <td>

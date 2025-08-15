@@ -1,5 +1,3 @@
-// src/hooks/useModelsManager.ts
-
 import { useState } from 'react';
 import { Model } from '../types/model';
 

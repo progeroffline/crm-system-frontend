@@ -1,6 +1,6 @@
-import Pencil from '../../atoms/icons/Pencil';
-import Trash from '../../atoms/icons/Trash';
 import { Model } from '../../../types/model';
+import PencilIcon from '@/components/atoms/icons/Pencil';
+import TrashIcon from '../../atoms/icons/Trash';
 
 interface ModelsTableRowProps {
   model: Model;
@@ -92,14 +92,14 @@ const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
           onClick={() => onEdit(model)}
           disabled={isEditingOrAdding}
         >
-          <Pencil className="h-4 w-4" />
+          <PencilIcon className="h-4 w-4" />
         </button>
         <button
           className="btn btn-error btn-xs"
           onClick={() => onDelete(model.id)}
           disabled={isEditingOrAdding}
         >
-          <Trash className="h-4 w-4" />
+          <TrashIcon className="h-4 w-4" />
         </button>
       </td>
     </tr>

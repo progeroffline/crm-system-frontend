@@ -60,16 +60,14 @@ const BindingsTableRow: React.FC<BindingsTableRowProps> = ({
       <td>
         <BooleanDisplay value={model.mailing} />
       </td>
-      <td>
-        <div className="flex flex-row items-center justify-center">
-          <button
-            className="btn btn-info btn-xs w-full"
-            onClick={() => onEdit(model)}
-            disabled={isEditingOrAdding}
-          >
-            <Pencil className="h-4 w-4" />
-          </button>
-        </div>
+      <td className="flex flex-col items-center gap-2">
+        <button
+          className="btn btn-info btn-xs w-full"
+          onClick={() => onEdit(model)}
+          disabled={isEditingOrAdding}
+        >
+          <Pencil className="h-4 w-4" />
+        </button>
       </td>
     </tr>
   );
