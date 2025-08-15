@@ -35,22 +35,27 @@ const PasswordWithMaskInputField: React.FC<InputFieldProps> = ({
   placeholder,
   onChange,
 }) => {
+  const [passwordInputFiledType, passwordInputFiledTypeSet] = useState('password');
   return (
     <div>
       <legend className="w-full fieldset-legend text-base">{label}</legend>
       <label className="w-full input validator">
         <KeyIcon />
         <input
-          type="password"
+          type={passwordInputFiledType}
           required
           placeholder={placeholder}
           onChange={onChange}
           minLength={8}
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-          title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+          title="Должно быть более 8 символов, включая цифры, строчные буквы, заглавные буквы"
         />
         <div className="cursor-pointer">
-          <EyeIcon />
+          <EyeIcon
+            onClick={() =>
+              passwordInputFiledTypeSet(passwordInputFiledType === 'password' ? 'text' : 'password')
+            }
+          />
         </div>
       </label>
       <p className="validator-hint hidden">{validationText}</p>

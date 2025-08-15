@@ -9,7 +9,7 @@ export class AuthApiInterface {
     userRegistrationData: UserRegistrationInterface
   ): Promise<{ data: User; status: number }> {
     const { data, status } = await this.axiosInstance.post<User>(
-      AuthApiEndpoints.REFRESH,
+      AuthApiEndpoints.REGISTER,
       userRegistrationData
     );
     return { data, status };
