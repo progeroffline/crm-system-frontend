@@ -1,5 +1,5 @@
 import React from 'react';
-import { Model } from './ModelsTable';
+import { Model } from '../../../types/model';
 
 interface ModelsTableFormRowProps {
   record: Model;

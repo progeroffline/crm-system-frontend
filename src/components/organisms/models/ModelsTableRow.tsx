@@ -1,7 +1,7 @@
 import React from 'react';
 import Pencil from '../../atoms/icons/Pencil';
 import Trash from '../../atoms/icons/Trash';
-import { Model } from './ModelsTable';
+import { Model } from '../../../types/model';
 
 interface ModelsTableRowProps {
   model: Model;

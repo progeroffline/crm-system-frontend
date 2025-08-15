@@ -1,102 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useModelsManager } from '../../../hooks/useModelsManager';
+import { Model } from '../../../types/model';
 import ModelsTableRow from './ModelsTableRow';
 import ModelsTableFormRow from './ModelsTableFormRow';
-
-// Interfaces
-interface Questionnaire {
-  vaginalMasturbationToys: boolean;
-  vaginalMasturbationFingers: boolean;
-  analMasturbationToys: boolean;
-  analMasturbationFingers: boolean;
-  sexWithMan: boolean;
-  oralSexToy: boolean;
-  squirtVideo: boolean;
-  feet: boolean;
-  peeVideo: boolean;
-  periodVideo: boolean;
-  minEnglish: boolean;
-  notReadyFor: string;
-  sexToys: string;
-  customs: boolean;
-  videoCalls: boolean;
-}
-
-export interface Model {
-  id: number | null;
-  avatar: string;
-  ml: string;
-  status: 'работает' | 'ушла' | 'блок' | 'удалена';
-  mailing: boolean;
-  questionnaire: Questionnaire;
-}
 
 interface ModelsTableProps {
   initialModels: Model[];
 }
 
-// Constants
-const NEW_EMPLOYEE_TEMPLATE: Model = {
-  id: null,
-  avatar: '',
-  ml: '',
-  status: 'работает',
-  mailing: false,
-  questionnaire: {
-    vaginalMasturbationToys: false,
-    vaginalMasturbationFingers: false,
-    analMasturbationToys: false,
-    analMasturbationFingers: false,
-    sexWithMan: false,
-    oralSexToy: false,
-    squirtVideo: false,
-    feet: false,
-    peeVideo: false,
-    periodVideo: false,
-    minEnglish: false,
-    notReadyFor: '',
-    sexToys: '',
-    customs: false,
-    videoCalls: false,
-  },
-};
-
-// Main Component
 const ModelsTable: React.FC<ModelsTableProps> = ({ initialModels }) => {
-  const [models, setModels] = useState<Model[]>(initialModels);
-  const [newModel, setNewModel] = useState<Model | null>(null);
-  const [editingModel, setEditingModel] = useState<Model | null>(null);
-
-  const isEditing = !!editingModel;
-  const isAdding = !!newModel;
-
-  // Handlers
-  const handleAdd = () => {
-    const randomImgId = Math.floor(Math.random() * 70) + 1;
-    setNewModel({
-      ...NEW_EMPLOYEE_TEMPLATE,
-      avatar: `https://i.pravatar.cc/150?img=${randomImgId}`,
-    });
-  };
-  const handleCancelAdd = () => setNewModel(null);
-  const handleSaveNew = () => {
-    if (newModel) {
-      setModels([{ ...newModel, id: new Date().getTime() }, ...models]);
-      setNewModel(null);
-    }
-  };
-  const handleEdit = (model: Model) => setEditingModel({ ...model });
-  const handleCancelEdit = () => setEditingModel(null);
-  const handleSaveEdit = () => {
-    if (editingModel) {
-      setModels(models.map((emp) => (emp.id === editingModel.id ? editingModel : emp)));
-      setEditingModel(null);
-    }
-  };
-  const handleDelete = (modelId: number | null) => {
-    if (modelId !== null && window.confirm('Вы уверены, что хотите удалить эту модель?')) {
-      setModels(models.filter((model) => model.id !== modelId));
-    }
-  };
+  const {
+    models,
+    newModel,
+    editingModel,
+    isAdding,
+    isEditing,
+    setNewModel,
+    setEditingModel,
+    handleAdd,
+    handleCancelAdd,
+    handleSaveNew,
+    handleEdit,
+    handleCancelEdit,
+    handleSaveEdit,
+    handleDelete,
+  } = useModelsManager(initialModels);
 
   return (
     <div className="p-6">
@@ -108,8 +36,8 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ initialModels }) => {
       </div>
 
       <div className="bg-base-100 shadow-xl rounded-lg">
-        <div className="overflow-x-auto rounded-lg">
-          <table className="table table-zebra w-full bg-base">
+        <div className="overflow-x-auto rounded-lg max-h-300">
+          <table className="table table-compact">
             <thead>
               <tr className="align-middle">
                 <th>Фото</th>

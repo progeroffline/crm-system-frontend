@@ -49,7 +49,7 @@ const MonthDailySalaryTable: React.FC = () => {
       {
         accessorKey: 'operatorName',
         header: 'Оператор',
-        setCellClassName: (): string => 'font-bold',
+        setCellClassName: (): string => 'font-medium',
         asTh: true,
       },
     ];
