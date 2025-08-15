@@ -1,107 +1,63 @@
 import DataTable, { DataTableColumnDefinition } from '@/components/molecules/tables/DataTable';
-import monthDailySalariesJson from '@/data/statistics.json';
-import colorizeCellByValue from './shared.ts';
+import { formatCell } from '@/lib/utils';
+import { generateMonthDailySalaries } from './generateFakeData';
+import colorizeCellByValue from './shared';
 
-interface MonthDailySalary {
+export type ShiftLabel = 'I' | 'II' | 'III';
+export type AdminIndex = 0 | 1;
+export type SalaryIndex = 0 | 1;
+
+export interface MonthDailySalaryWithTimeShift {
   id: number;
   operatorName: string;
-  dayNumber_1: number | null;
-  dayNumber_2: number | null;
-  dayNumber_3: number | null;
-  dayNumber_4: number | null;
-  dayNumber_5: number | null;
-  dayNumber_6: number | null;
-  dayNumber_7: number | null;
-  dayNumber_8: number | null;
-  dayNumber_9: number | null;
-  dayNumber_10: number | null;
-  dayNumber_11: number | null;
-  dayNumber_12: number | null;
-  dayNumber_13: number | null;
-  dayNumber_14: number | null;
-  dayNumber_15: number | null;
-  dayNumber_16: number | null;
-  dayNumber_17: number | null;
-  dayNumber_18: number | null;
-  dayNumber_19: number | null;
-  dayNumber_20: number | null;
-  dayNumber_21: number | null;
-  dayNumber_22: number | null;
-  dayNumber_23: number | null;
-  dayNumber_24: number | null;
-  dayNumber_25: number | null;
-  dayNumber_26: number | null;
-  dayNumber_27: number | null;
-  dayNumber_28: number | null;
-  dayNumber_29: number | null;
-  dayNumber_30: number | null;
-  dayNumber_31: number | null;
+  [key: `timeShiftNumber_${number}_${ShiftLabel}`]: number;
+  [key: `adminSalary_${number}_${ShiftLabel}_${SalaryIndex}`]: number;
+  [key: `adminName_${number}_${ShiftLabel}_${AdminIndex}`]: string;
 }
 
-const monthDailySalaries: MonthDailySalary[] = monthDailySalariesJson;
-
+const monthDailySalariesWithTimeShiftData = generateMonthDailySalaries(30, 10);
 const MonthDailySalaryWithTimeShiftTable: React.FC = () => {
   const monthDailySalariesColumns = (
-    daysInMonth: number,
-    startingDayOfWeek: number
-  ): DataTableColumnDefinition<MonthDailySalary>[] => {
-    const columns: DataTableColumnDefinition<MonthDailySalary>[] = [
+    daysInMonth: number
+  ): DataTableColumnDefinition<MonthDailySalaryWithTimeShift>[] => {
+    const columns: DataTableColumnDefinition<MonthDailySalaryWithTimeShift>[] = [
       {
         accessorKey: 'operatorName',
         header: 'Оператор',
-        className: 'min-w-32',
         setCellClassName: (): string => 'font-bold',
         asTh: true,
       },
     ];
 
-    const daysOfWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-
     for (let i = 1; i <= daysInMonth; i++) {
-      const dayOfWeek = daysOfWeek[(startingDayOfWeek + i - 2) % 7];
       columns.push({
-        header: dayOfWeek,
-        columns: [
-          {
-            accessorKey: `dayNumber_${i}` as keyof MonthDailySalary,
-            header: `${i}`,
-            className: '',
-            setCellClassName: (value: string | number | null, _: MonthDailySalary): string =>
-              colorizeCellByValue(value),
-          },
-        ],
+        header: i.toString(),
+        columns: ['I', 'II', 'III'].map((shiftNumber: string) => ({
+          accessorKey: `timeShiftNumber_${i}_${shiftNumber}` as keyof MonthDailySalaryWithTimeShift,
+          header: shiftNumber.toString(),
+          columns: [40.0, 38.1].map((salary: number, index: number) => ({
+            accessorKey:
+              `adminSalary_${i}_${shiftNumber}_${index}` as keyof MonthDailySalaryWithTimeShift,
+            header: formatCell(salary),
+            columns: ['Deadpool', 'Creator'].map((adminName: string, index: number) => ({
+              accessorKey:
+                `adminName_${i}_${shiftNumber}_${index}` as keyof MonthDailySalaryWithTimeShift,
+              header: adminName,
+              setCellClassName: (
+                value: string | number | null,
+                _: MonthDailySalaryWithTimeShift
+              ): string => colorizeCellByValue(value),
+            })),
+          })),
+        })),
       });
     }
 
     return columns;
   };
 
-  const calculateTotals = (): Partial<MonthDailySalary> => {
-    const totals: Partial<MonthDailySalary> = {};
-
-    for (let i = 1; i <= 31; i++) {
-      const dayKey = `dayNumber_${i}` as keyof MonthDailySalary;
-      const totalForDay = monthDailySalaries.reduce((sum, currentRow) => {
-        const value = currentRow[dayKey];
-        return sum + (typeof value === 'number' ? value : 0);
-      }, 0);
-
-      // @ts-expect-error Key 100% exists
-      totals[dayKey] = totalForDay;
-    }
-
-    return totals;
-  };
-
-  const footerData = calculateTotals();
-
   return (
-    <DataTable
-      columns={monthDailySalariesColumns(30, 1)}
-      data={monthDailySalaries}
-      footerData={footerData}
-    />
+    <DataTable columns={monthDailySalariesColumns(30)} data={monthDailySalariesWithTimeShiftData} />
   );
 };
-
 export default MonthDailySalaryWithTimeShiftTable;

@@ -10,6 +10,7 @@ import ProtectedLayout from './layouts/ProtectedLayout';
 import GuestLayout from './layouts/GuestLayout';
 import Profile from './pages/Profile';
 import Statistics from './pages/Statistics';
+import Models from './pages/Models';
 import Settings from './pages/Settings';
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
           {
             path: '/',
             element: <Statistics />,
+          },
+          {
+            path: '/models',
+            element: <Models />,
           },
           {
             path: '/profile',

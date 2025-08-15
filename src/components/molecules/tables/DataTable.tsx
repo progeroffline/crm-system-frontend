@@ -1,4 +1,4 @@
-import { mergeClassNames } from '@/lib/utils';
+import { formatCell, mergeClassNames } from '@/lib/utils';
 
 export interface DataTableColumnDefinition<T> {
   header: string;
@@ -50,22 +50,6 @@ const DataTable = <T extends { id: string | number }>({
 
   const headerRows: DataTableColumnDefinition<T>[][] = [];
 
-  const currencyFormatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  });
-
-  const formatCell = (value: number | string | Partial<T>[keyof T]) => {
-    if (typeof value === 'number') {
-      return currencyFormatter.format(value);
-    }
-    if (value === null) {
-      return currencyFormatter.format(0);
-    }
-    return String(value ?? '');
-  };
-
   const getColSpan = (col: DataTableColumnDefinition<T>) =>
     col.columns ? getLeafColumns(col.columns).length : 1;
 
@@ -89,7 +73,7 @@ const DataTable = <T extends { id: string | number }>({
 
   return (
     <div className="max-h-200 overflow-x-auto scrollbar-hide shadow rounded-xs">
-      <table className="table-compact">
+      <table className="table-compact text-center">
         <thead>
           {headerRows.map((row, rowIndex) => (
             <tr key={rowIndex}>
@@ -100,7 +84,7 @@ const DataTable = <T extends { id: string | number }>({
 
                 return (
                   <th
-                    key={colIndex}
+                    key={`${col.accessorKey?.toString()}_${colIndex}`}
                     colSpan={colSpan}
                     rowSpan={rowSpan}
                     className={mergeClassNames([col.className ?? ''])}
@@ -115,7 +99,7 @@ const DataTable = <T extends { id: string | number }>({
         <tbody>
           {data.map((item) => (
             <tr key={item.id}>
-              {leafColumns.map((column) =>
+              {leafColumns.map((column, index) =>
                 column.asTh ? (
                   <th
                     className={mergeClassNames([
@@ -123,9 +107,11 @@ const DataTable = <T extends { id: string | number }>({
                         ? column.setCellClassName(item[column.accessorKey], item)
                         : '',
                     ])}
-                    key={String(column.accessorKey)}
+                    key={`${String(column.accessorKey)}_${index}`}
                   >
-                    {column.accessorKey ? formatCell(item[column.accessorKey]) : ''}
+                    {column.accessorKey
+                      ? formatCell(item[column.accessorKey] as number | string)
+                      : ''}
                   </th>
                 ) : (
                   <td
@@ -134,9 +120,12 @@ const DataTable = <T extends { id: string | number }>({
                         ? column.setCellClassName(item[column.accessorKey], item)
                         : '',
                     ])}
-                    key={String(column.accessorKey)}
+                    key={`${String(column.accessorKey)}_${index}`}
+                    data-access-key={String(column.accessorKey)}
                   >
-                    {column.accessorKey ? formatCell(item[column.accessorKey]) : ''}
+                    {column.accessorKey
+                      ? formatCell(item[column.accessorKey] as number | string)
+                      : ''}
                   </td>
                 )
               )}
@@ -152,8 +141,8 @@ const DataTable = <T extends { id: string | number }>({
                 }
                 const value = column.accessorKey ? footerData[column.accessorKey] : null;
                 return (
-                  <td key={`footer-${String(column.accessorKey)}`}>
-                    {value ? formatCell(value) : ''}
+                  <td key={`footer_${String(column.accessorKey)}_${index}`}>
+                    {value ? formatCell(value as number | string) : ''}
                   </td>
                 );
               })}

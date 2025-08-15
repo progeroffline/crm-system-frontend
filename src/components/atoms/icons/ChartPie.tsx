@@ -1,7 +1,7 @@
 import { mergeClassNames } from '@/lib/utils';
 import IconProps, { generalIconProps } from './DefaultProps';
 
-const ChartPie: React.FC<IconProps> = ({ className, ...props }) => {
+const ChartPieIcon: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       {...generalIconProps}
@@ -22,4 +22,4 @@ const ChartPie: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-export default ChartPie;
+export default ChartPieIcon;

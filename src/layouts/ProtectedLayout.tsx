@@ -2,8 +2,9 @@ import NavigationBar from '@/components/organisms/NavigationBar';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useState } from 'react';
-import ChartPie from '@/components/atoms/icons/ChartPie';
+import ChartPieIcon from '@/components/atoms/icons/ChartPie';
 import SideBar from '@/components/organisms/SideBar';
+import HeartIcon from '@/components/atoms/icons/Heart';
 
 const ProtectedLayout = () => {
   const { isAuthenticated } = useAuth();
@@ -21,7 +22,10 @@ const ProtectedLayout = () => {
     <div className="flex h-screen">
       <SideBar
         isCollapsed={isSidebarCollapsed}
-        items={[{ path: '/', label: 'Статистика', icon: <ChartPie /> }]}
+        items={[
+          { path: '/', label: 'Статистика', icon: <ChartPieIcon /> },
+          { path: '/models', label: 'Модели', icon: <HeartIcon /> },
+        ]}
       />
       <div className="flex-1 flex flex-col overflow-hidden">
         <NavigationBar onToggleSidebar={toggleSidebar} />

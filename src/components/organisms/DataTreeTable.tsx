@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ChevronRight from '../atoms/icons/ChevronRight';
-import ChevronDown from '../atoms/icons/ChevronDown';
+import ChevronRightIcon from '../atoms/icons/ChevronRight';
+import ChevronDownIcon from '../atoms/icons/ChevronDown';
 
 export interface DataTreeTableColumnDefinition<T> {
   header: string;
@@ -127,9 +127,9 @@ const DataTreeTable = <T extends { id: string | number }>({
                   {columnIndex === 0 && hasChildren && (
                     <span className="mr-2">
                       {isExpanded ? (
-                        <ChevronDown className="size-3" />
+                        <ChevronDownIcon className="size-3" />
                       ) : (
-                        <ChevronRight className="size-3" />
+                        <ChevronRightIcon className="size-3" />
                       )}
                     </span>
                   )}
@@ -150,9 +150,9 @@ const DataTreeTable = <T extends { id: string | number }>({
                   {columnIndex === 0 && hasChildren && (
                     <span className="mr-2">
                       {isExpanded ? (
-                        <ChevronDown className="size-3" />
+                        <ChevronDownIcon className="size-3" />
                       ) : (
-                        <ChevronRight className="size-3" />
+                        <ChevronRightIcon className="size-3" />
                       )}
                     </span>
                   )}

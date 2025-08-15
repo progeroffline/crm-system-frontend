@@ -1,5 +1,5 @@
 import Stats from '@/components/molecules/StatsBadge';
-import CurveArrowUp from '@/components/atoms/icons/CurveArrowUp';
+import CurveArrowUpIcon from '@/components/atoms/icons/CurveArrowUp';
 import DollarIcon from '@/components/atoms/icons/Dollar';
 import SearchIcon from '@/components/atoms/icons/Search';
 import SearchInputField from '@/components/molecules/inputs/Search';
@@ -7,6 +7,7 @@ import MonthDailySalaryTable from '@/components/templates/tables/MonthDailySalar
 import MonthDailyBalanceTable from '@/components/templates/tables/MonthDailyBalance';
 import DateRangePickerField from '@/components/organisms/DateRangePicker';
 import MonthDailySalaryWithTimeShiftTable from '@/components/templates/tables/MonthDailySalaryWithTimeShift';
+import YearDailySalaryTableData from '@/components/templates/tables/YearDailySalary';
 
 const Statistics: React.FC = () => {
   const suggestions: string[] = [
@@ -58,17 +59,17 @@ const Statistics: React.FC = () => {
           icon={<DollarIcon />}
           title="Прогноз"
           value={9304}
-          descriptionIcon={<CurveArrowUp />}
+          descriptionIcon={<CurveArrowUpIcon />}
           description="Прогноз заработка на следующий месяц"
         />
       </div>
       <div className="mt-4">
-        <div className="text-center">
-          <span className="text-xl font-bold">Балансы</span>
+        <div className="text-left">
+          <h1 className="text-2xl font-bold">Балансы</h1>
           <MonthDailyBalanceTable />
         </div>
-        <div className="mt-4 text-center">
-          <span className="text-xl font-bold">Статистика</span>
+        <div className="mt-4 text-left">
+          <h1 className="text-2xl font-bold">Статистика</h1>
           <div className="tabs tabs-lift">
             <input
               type="radio"
@@ -78,27 +79,20 @@ const Statistics: React.FC = () => {
               defaultChecked
             />
             <div className="tab-content bg-base-100 border-base-300 p-6">
-              <MonthDailySalaryTable></MonthDailySalaryTable>
+              <YearDailySalaryTableData />
             </div>
-            <input
-              type="radio"
-              name="monthStatsTabs"
-              className="tab"
-              aria-label="За месяц"
-              defaultChecked
-            />
+            <input type="radio" name="monthStatsTabs" className="tab" aria-label="За месяц" />
             <div className="tab-content bg-base-100 border-base-300 p-6">
-              <MonthDailySalaryTable></MonthDailySalaryTable>
+              <MonthDailySalaryTable />
             </div>
             <input
               type="radio"
               name="monthStatsTabs"
               className="tab"
               aria-label="За месяц по сменам"
-              defaultChecked
             />
             <div className="tab-content bg-base-100 border-base-300 p-6">
-              <MonthDailySalaryWithTimeShiftTable></MonthDailySalaryWithTimeShiftTable>
+              <MonthDailySalaryWithTimeShiftTable />
             </div>
           </div>
         </div>

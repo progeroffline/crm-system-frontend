@@ -1,7 +1,7 @@
 import { mergeClassNames } from '@/lib/utils';
 import IconProps, { generalIconProps } from './DefaultProps';
 
-const ChevronRight: React.FC<IconProps> = ({ className, ...props }) => {
+const ChevronRightIcon: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       {...generalIconProps}
@@ -13,4 +13,4 @@ const ChevronRight: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-export default ChevronRight;
+export default ChevronRightIcon;

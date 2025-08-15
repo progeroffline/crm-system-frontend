@@ -1,7 +1,7 @@
 import { mergeClassNames } from '@/lib/utils';
 import IconProps, { generalIconProps } from './DefaultProps';
 
-const CurveArrowUpIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const PencilIcon: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       {...generalIconProps}
@@ -11,10 +11,10 @@ const CurveArrowUpIcon: React.FC<IconProps> = ({ className, ...props }) => {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
+        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
       />
     </svg>
   );
 };
 
-export default CurveArrowUpIcon;
+export default PencilIcon;
