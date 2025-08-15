@@ -22,7 +22,10 @@ const MarketingTable: React.FC<MarketingTableProps> = ({ initialData }) => {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Маркетинг</h1>
+        <div>
+            <h1 className="text-2xl font-bold">Маркетинг</h1>
+            <p className="text-base-content/70">Анализ и управление маркетинговыми кампаниями и источниками трафика.</p>
+        </div>
       </div>
 
       <div className="bg-base-100 shadow-xl rounded-lg">

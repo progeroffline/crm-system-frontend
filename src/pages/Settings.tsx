@@ -42,7 +42,7 @@ const Settings: React.FC = () => {
                   <SettingsIcon className="w-6 h-6" /> Общие настройки
                 </h2>
                 <p className="text-base-content/70">
-                  Основные настройки вашего рабочего пространства.
+                  Глобальные настройки CRM-системы.
                 </p>
               </div>
               <div className="md:col-span-2 grid sm:grid-cols-2 gap-4">
