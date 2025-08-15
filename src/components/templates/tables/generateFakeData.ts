@@ -120,3 +120,106 @@ export function generateYearDailySalaries(
 
   return data;
 }
+
+import { Model, Status, AssignedModel } from '../../../types/model';
+
+// --- Data for ModelsTable ---
+const firstNames = ['Мария', 'Анна', 'Екатерина', 'Ольга', 'София', 'Виктория', 'Алиса'];
+const lastNames = [
+  'Иванова',
+  'Петрова',
+  'Смирнова',
+  'Кузнецова',
+  'Попова',
+  'Васильева',
+  'Соколова',
+];
+const patronymics = [
+  'Сергеевна',
+  'Андреевна',
+  'Алексеевна',
+  'Дмитриевна',
+  'Максимовна',
+  'Ивановна',
+];
+const statuses: Status[] = ['работает', 'ушла', 'блок', 'удалена'];
+const notReadyOptions = ['Экстрим', 'Скат', 'Насилие', 'Анал', 'Ступни', 'Моча', ''];
+const sexToysOptions = [
+  'Дилдо',
+  'Вибратор',
+  'Анальная пробка',
+  'Вибромассажер',
+  'Все виды',
+  'Нет',
+  'Стеклянный дилдо',
+];
+
+const getRandomElement = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+const getRandomBoolean = (): boolean => Math.random() > 0.5;
+const getRandomId = (): number => new Date().getTime() + Math.random();
+
+const generateSingleFakeModel = (): Model => {
+  const fullName = `${getRandomElement(lastNames)} ${getRandomElement(firstNames)} ${getRandomElement(patronymics)}`;
+  const randomImgId = Math.floor(Math.random() * 70) + 1;
+
+  return {
+    id: getRandomId(),
+    avatar: `https://i.pravatar.cc/150?img=${randomImgId}`,
+    fullName,
+    ml: `ML-${Math.floor(Math.random() * 90000) + 10000}`,
+    status: getRandomElement(statuses),
+    mailing: getRandomBoolean(),
+    questionnaire: {
+      vaginalMasturbationToys: getRandomBoolean(),
+      vaginalMasturbationFingers: getRandomBoolean(),
+      analMasturbationToys: getRandomBoolean(),
+      analMasturbationFingers: getRandomBoolean(),
+      sexWithMan: getRandomBoolean(),
+      oralSexToy: getRandomBoolean(),
+      squirtVideo: getRandomBoolean(),
+      feet: getRandomBoolean(),
+      peeVideo: getRandomBoolean(),
+      periodVideo: getRandomBoolean(),
+      minEnglish: getRandomBoolean(),
+      notReadyFor: getRandomElement(notReadyOptions),
+      sexToys: getRandomElement(sexToysOptions),
+      customs: getRandomBoolean(),
+      videoCalls: getRandomBoolean(),
+    },
+  };
+};
+
+export const generateFakeModelsData = (count: number): Model[] => {
+  return Array.from({ length: count }, generateSingleFakeModel);
+};
+
+// --- Data for BindingsModelsTable ---
+export const superAdmins = ['Иван Грозный', 'Екатерина Великая'];
+export const topAdmins = ['Александр Суворов', 'Михаил Кутузов', 'Георгий Жуков'];
+export const admins = ['Петр I', 'Николай II', 'Александр III'];
+export const operators = ['Юрий Гагарин', 'Валентина Терешкова', 'Герман Титов', 'Алексей Леонов'];
+
+const generateSingleAssignedModel = (): AssignedModel => {
+  const baseModel = generateSingleFakeModel();
+  const registrationDate = new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000);
+
+  return {
+    id: baseModel.id,
+    avatar: baseModel.avatar,
+    fullName: baseModel.fullName,
+    ml: baseModel.ml,
+    status: baseModel.status,
+    mailing: baseModel.mailing,
+    total: Math.floor(Math.random() * 5000),
+    forecast: Math.floor(Math.random() * 8000),
+    registrationDate: registrationDate.toISOString().split('T')[0],
+    superAdmin: getRandomElement([...superAdmins, null]),
+    topAdmin: getRandomElement([...topAdmins, null]),
+    admin: getRandomElement([...admins, null]),
+    operator: getRandomElement([...operators, null]),
+  };
+};
+
+export const generateFakeAssignedModelsData = (count: number): AssignedModel[] => {
+  return Array.from({ length: count }, generateSingleAssignedModel);
+};

@@ -18,7 +18,7 @@ const statusColors: Record<string, string> = {
 };
 
 const BooleanDisplay: React.FC<{ value: boolean }> = ({ value }) => (
-  <input type="checkbox" checked={value} readOnly disabled className="checkbox checkbox-sm" />
+  <input type="checkbox" checked={value} readOnly className="checkbox checkbox-sm" />
 );
 
 const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
@@ -28,7 +28,7 @@ const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
   onDelete,
 }) => {
   return (
-    <tr className="hover align-middle">
+    <tr className="hover:bg-base-300">
       <td>
         <div className="avatar">
           <div className="mask mask-squircle h-12 w-12">
@@ -36,6 +36,7 @@ const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
           </div>
         </div>
       </td>
+      <td>{model.fullName}</td>
       <td>{model.ml}</td>
       <td>
         <BooleanDisplay value={model.mailing} />

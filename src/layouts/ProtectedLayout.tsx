@@ -5,6 +5,7 @@ import { useState } from 'react';
 import ChartPieIcon from '@/components/atoms/icons/ChartPie';
 import SideBar from '@/components/organisms/SideBar';
 import HeartIcon from '@/components/atoms/icons/Heart';
+import PaperClipIcon from '@/components/atoms/icons/PaperClip';
 
 const ProtectedLayout = () => {
   const { isAuthenticated } = useAuth();
@@ -25,6 +26,7 @@ const ProtectedLayout = () => {
         items={[
           { path: '/', label: 'Статистика', icon: <ChartPieIcon /> },
           { path: '/models', label: 'Модели', icon: <HeartIcon /> },
+          { path: '/models/bindings', label: 'Панель назначения', icon: <PaperClipIcon /> },
         ]}
       />
       <div className="flex-1 flex flex-col overflow-hidden">

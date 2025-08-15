@@ -1,9 +1,9 @@
-import React from 'react';
-import modelsData from '../data/models.json';
-import ModelsTable, { type Model } from '../components/organisms/models/ModelsTable';
+import ModelsTable from '../components/organisms/models/ModelsTable';
+import { generateFakeModelsData } from '../components/templates/tables/generateFakeData';
 
 const Models: React.FC = () => {
-  return <ModelsTable initialModels={modelsData as Model[]} />;
+  const modelsData = generateFakeModelsData(25);
+  return <ModelsTable initialModels={modelsData} />;
 };
 
 export default Models;

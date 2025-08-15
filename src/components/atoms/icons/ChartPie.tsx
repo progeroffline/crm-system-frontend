@@ -1,13 +1,9 @@
-import { mergeClassNames } from '@/lib/utils';
-import IconProps, { generalIconProps } from './DefaultProps';
+import React from 'react';
+import BaseIcon from './DefaultProps';
 
-const ChartPieIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const ChartPieIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
-    <svg
-      {...generalIconProps}
-      {...props}
-      className={mergeClassNames(generalIconProps.className, className)}
-    >
+    <BaseIcon {...props}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -18,7 +14,7 @@ const ChartPieIcon: React.FC<IconProps> = ({ className, ...props }) => {
         strokeLinejoin="round"
         d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"
       />
-    </svg>
+    </BaseIcon>
   );
 };
 

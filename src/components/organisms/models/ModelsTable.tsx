@@ -41,6 +41,7 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ initialModels }) => {
             <thead>
               <tr className="align-middle">
                 <th>Фото</th>
+                <th>ФИО</th>
                 <th>ML</th>
                 <th>Рассылка</th>
                 <th>Кастомы</th>

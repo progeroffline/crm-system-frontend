@@ -1,15 +1,11 @@
-import { mergeClassNames } from '@/lib/utils';
-import IconProps, { generalIconProps } from './DefaultProps';
+import React from 'react';
+import BaseIcon from './DefaultProps';
 
-const ChevronRightIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const ChevronRightIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
-    <svg
-      {...generalIconProps}
-      {...props}
-      className={mergeClassNames(generalIconProps.className, className)}
-    >
+    <BaseIcon {...props}>
       <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-    </svg>
+    </BaseIcon>
   );
 };
 

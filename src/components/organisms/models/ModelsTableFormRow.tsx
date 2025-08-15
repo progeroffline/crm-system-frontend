@@ -67,6 +67,16 @@ const ModelsTableFormRow: React.FC<ModelsTableFormRowProps> = ({
       <td>
         <input
           type="text"
+          name="fullName"
+          placeholder="ФИО"
+          className="input input-bordered input-sm w-full"
+          value={record.fullName}
+          onChange={handleInputChange}
+        />
+      </td>
+      <td>
+        <input
+          type="text"
           name="ml"
           placeholder="ML"
           className="input input-bordered input-sm w-full"

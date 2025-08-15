@@ -12,6 +12,7 @@ import Profile from './pages/Profile';
 import Statistics from './pages/Statistics';
 import Models from './pages/Models';
 import Settings from './pages/Settings';
+import BindingsModels from './pages/BindingsModels';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
           {
             path: '/models',
             element: <Models />,
+          },
+          {
+            path: '/models/bindings',
+            element: <BindingsModels />,
           },
           {
             path: '/profile',

@@ -2,6 +2,7 @@
   {
     "id": 1,
     "avatar": "https://i.pravatar.cc/150?img=1",
+    "fullName": "Иванова Мария Петровна",
     "ml": "ML-12345",
     "status": "работает",
     "mailing": true,
@@ -26,6 +27,7 @@
   {
     "id": 2,
     "avatar": "https://i.pravatar.cc/150?img=2",
+    "fullName": "Петрова Анна Сергеевна",
     "ml": "ML-67890",
     "status": "ушла",
     "mailing": false,

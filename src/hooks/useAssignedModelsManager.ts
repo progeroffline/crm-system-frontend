@@ -1,48 +1,38 @@
-// src/hooks/useModelsManager.ts
+// src/hooks/useAssignedModelsManager.ts
 
 import { useState } from 'react';
-import { Model } from '../types/model';
+import { AssignedModel } from '../types/model';
+import { superAdmins, topAdmins, admins, operators } from '../components/templates/tables/generateFakeData';
 
-const NEW_EMPLOYEE_TEMPLATE: Model = {
+const getRandomElement = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+
+const NEW_ASSIGNED_MODEL_TEMPLATE: AssignedModel = {
   id: null,
   avatar: '',
   fullName: '',
   ml: '',
   status: 'работает',
   mailing: false,
-  questionnaire: {
-    vaginalMasturbationToys: false,
-    vaginalMasturbationFingers: false,
-    analMasturbationToys: false,
-    analMasturbationFingers: false,
-    sexWithMan: false,
-    oralSexToy: false,
-    squirtVideo: false,
-    feet: false,
-    peeVideo: false,
-    periodVideo: false,
-    minEnglish: false,
-    notReadyFor: '',
-    sexToys: '',
-    customs: false,
-    videoCalls: false,
-  },
+  total: 0,
+  forecast: 0,
+  registrationDate: new Date().toISOString().split('T')[0],
+  superAdmin: null,
+  topAdmin: null,
+  admin: null,
+  operator: null,
 };
 
-export const useModelsManager = (initialModels: Model[]) => {
-  const [models, setModels] = useState<Model[]>(initialModels);
-  const [newModel, setNewModel] = useState<Model | null>(null);
-  const [editingModel, setEditingModel] = useState<Model | null>(null);
+export const useAssignedModelsManager = (initialModels: AssignedModel[]) => {
+  const [models, setModels] = useState<AssignedModel[]>(initialModels);
+  const [newModel, setNewModel] = useState<AssignedModel | null>(null);
+  const [editingModel, setEditingModel] = useState<AssignedModel | null>(null);
 
   const isEditing = !!editingModel;
   const isAdding = !!newModel;
 
   const handleAdd = () => {
     const randomImgId = Math.floor(Math.random() * 70) + 1;
-    setNewModel({
-      ...NEW_EMPLOYEE_TEMPLATE,
-      avatar: `https://i.pravatar.cc/150?img=${randomImgId}`,
-    });
+    setNewModel({ ...NEW_ASSIGNED_MODEL_TEMPLATE, avatar: `https://i.pravatar.cc/150?img=${randomImgId}` });
   };
 
   const handleCancelAdd = () => setNewModel(null);
@@ -54,7 +44,7 @@ export const useModelsManager = (initialModels: Model[]) => {
     }
   };
 
-  const handleEdit = (model: Model) => setEditingModel({ ...model });
+  const handleEdit = (model: AssignedModel) => setEditingModel({ ...model });
 
   const handleCancelEdit = () => setEditingModel(null);
 

@@ -23,8 +23,19 @@ export interface Questionnaire {
 export interface Model {
   id: number | null;
   avatar: string;
+  fullName: string;
   ml: string;
   status: Status;
   mailing: boolean;
   questionnaire: Questionnaire;
+}
+
+export interface AssignedModel extends Omit<Model, 'questionnaire'> {
+  total: number;
+  forecast: number;
+  registrationDate: string;
+  superAdmin: string | null;
+  topAdmin: string | null;
+  admin: string | null;
+  operator: string | null;
 }
