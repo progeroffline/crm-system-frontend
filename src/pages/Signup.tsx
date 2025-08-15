@@ -1,10 +1,10 @@
 import { backednApiInterface } from '@/api';
-import LogotypeLabel from '@/components/branding/Logotype';
-import LogotypeImage from '@/components/branding/LogotypeImage';
-import ThemeControls from '@/components/controls/ThemeController';
-import EnterIcon from '@/components/icons/Enter';
-import { PasswordWithMaskInputField } from '@/components/inputs/Password';
-import UsernameInputField from '@/components/inputs/Username';
+import LogotypeLabel from '@/components/atoms/branding/Logotype';
+import LogotypeImage from '@/components/atoms/branding/LogotypeImage';
+import ThemeControls from '@/components/molecules/controls/ThemeController';
+import EnterIcon from '@/components/atoms/icons/Enter';
+import { PasswordWithMaskInputField } from '@/components/molecules/inputs/Password';
+import UsernameInputField from '@/components/molecules/inputs/Username';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -66,7 +66,7 @@ const Signup = () => {
             Создать аккаунт
             <EnterIcon />
           </button>
-          <a className="link link-secondary mt-1" href="/login">
+          <a className="link mt-1" href="/login">
             Войти в существующий аккаунт
           </a>
         </div>

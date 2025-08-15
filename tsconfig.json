@@ -24,5 +24,6 @@
     }
   },
   "include": ["src"],
+  "files": ["src/types/cally.d.ts"],
   "references": []
 }

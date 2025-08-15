@@ -1,6 +1,147 @@
 @import 'tailwindcss';
+
 @plugin "daisyui" {
   themes:
-    emerald --default,
-    dracula --prefersdark;
+    fantasy --default,
+    dark --prefersdark;
+}
+
+@plugin "daisyui/theme" {
+  name: 'light';
+  default: false;
+  prefersdark: false;
+  color-scheme: 'light';
+  --color-base-100: #fff;
+  --color-base-200: #eef0f2;
+  --color-base-300: #dcdee0;
+  --color-base-content: #1e2328;
+  --color-primary: #167bff;
+  --color-primary-content: #fff;
+  --color-secondary: #9c5de8;
+  --color-secondary-content: #fff;
+  --color-accent: #00d3bb;
+  --color-accent-content: #f3fbf6;
+  --color-neutral: #1e2832;
+  --color-neutral-content: #fafcff;
+  --color-info: #14b4ff;
+  --color-info-content: #fff;
+  --color-success: #0bbf58;
+  --color-success-content: #fff;
+  --color-warning: #f5a524;
+  --color-warning-content: #150a00;
+  --color-error: #f31260;
+  --color-error-content: #fff;
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+  --root-bg: #fafbfc;
+  --layout-sidebar-background: #fff;
+  --layout-topbar-background: #fff;
+  --rounded-box: 0.25rem;
+  --card-p: 20px;
+  --card-fs: var(--text-base);
+}
+
+@plugin "daisyui/theme" {
+  name: 'dark';
+  default: false;
+  prefersdark: false;
+  color-scheme: dark;
+  --color-base-100: #181c20;
+  --color-base-200: #22262a;
+  --color-base-300: #2c3034;
+  --color-base-content: #f0f4f8;
+  --color-primary: #378dff;
+  --color-primary-content: #fff;
+  --color-secondary: #b071ff;
+  --color-secondary-content: #fff;
+  --color-accent: #00d3bb;
+  --color-accent-content: #f3fbf6;
+  --color-neutral: #dce1e6;
+  --color-neutral-content: #1e2832;
+  --color-info: #14b4ff;
+  --color-info-content: #fff;
+  --color-success: #0bbf58;
+  --color-success-content: #fff;
+  --color-warning: #f5a524;
+  --color-warning-content: #150a00;
+  --color-error: #f31260;
+  --color-error-content: #fff;
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+  --root-bg: #121416;
+  --layout-sidebar-background: #181c20;
+  --layout-topbar-background: #181b1f;
+  --rounded-box: 0.25rem;
+  --card-p: 20px;
+  --card-fs: var(--text-base);
+}
+
+@layer components {
+  .table-compact {
+  }
+
+  .table-compact th,
+  .table-compact td {
+    padding: 1px;
+    border: 1px solid var(--color-base-200);
+    background-color: var(--color-base-100);
+  }
+
+  .table-compact thead {
+    background-color: var(--color-base-100);
+  }
+
+  .table-compact thead th {
+    text-align: center;
+  }
+
+  .table-compact tbody th,
+  .table-compact tfoot th {
+    text-align: left;
+    position: sticky;
+    z-index: 1;
+    left: 0;
+    background-color: var(--color-base-100);
+    padding-left: 5px;
+    border-left: none;
+    opacity: 1 !important;
+  }
+
+  .table-compact tfoot tr {
+    text-align: left;
+    position: sticky;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+    background-color: var(--color-base-100);
+    padding-left: 5px;
+    border-left: none;
+    opacity: 1 !important;
+  }
+
+  .table-compact thead tr:last-child th {
+    position: sticky;
+    z-index: 1;
+    top: -1px;
+    background-color: var(--color-base-100);
+    border-top: none;
+  }
+
+  .table-compact tbody tr:hover > :not(th) {
+    opacity: 0.75;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
 }

@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "operatorName": "Оператор А",
+    "timeShiftNumber_1_I": 4,
+    "adminSalary_1_I_0": 52.13,
+    "adminSalary_1_I_1": 52.13,
+    "adminName_1_I_0": "Deadpool",
+    "adminName_1_I_1": "Creator",
+
+    "timeShiftNumber_1_II": 4,
+    "adminSalary_1_II_0": 48.5,
+    "adminSalary_1_II_1": 48.5,
+    "adminName_1_II_0": "Deadpool",
+    "adminName_1_II_1": "Creator"
+  }
+]
