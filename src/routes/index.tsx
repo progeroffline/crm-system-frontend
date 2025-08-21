@@ -1,22 +1,25 @@
-import Models from '../pages/Models';
-import BindingsModels from '../pages/BindingsModels';
-import Marketing from '../pages/Marketing';
-import Ratings from '../pages/Ratings';
-import Leavings from '../pages/Leavings';
-import Users from '../pages/Users';
-import Statistics from '../pages/Statistics';
-import Settings from '../pages/Settings';
-import Profile from '../pages/Profile';
+import React from 'react';
 
-import UserIcon from '../components/atoms/icons/User';
-import ChartPieIcon from '../components/atoms/icons/ChartPie';
-import SettingsIcon from '../components/atoms/icons/Settings';
-import HeartIcon from '../components/atoms/icons/Heart';
-import PaperClipIcon from '../components/atoms/icons/PaperClip';
-import DollarIcon from '../components/atoms/icons/Dollar';
+const Models = React.lazy(() => import('../pages/Models'));
+const BindingsModels = React.lazy(() => import('../pages/BindingsModels'));
+const Marketing = React.lazy(() => import('../pages/Marketing'));
+const Ratings = React.lazy(() => import('../pages/Ratings'));
+const Leavings = React.lazy(() => import('../pages/Leavings'));
+const Users = React.lazy(() => import('../pages/Users'));
+const Statistics = React.lazy(() => import('../pages/Statistics'));
+const Settings = React.lazy(() => import('../pages/Settings'));
+const Profile = React.lazy(() => import('../pages/Profile'));
+
+import UserIcon from '@/components/atoms/icons/User';
+import ChartPieIcon from '@/components/atoms/icons/ChartPie';
+import SettingsIcon from '@/components/atoms/icons/Settings';
+import HeartIcon from '@/components/atoms/icons/Heart';
+import PaperClipIcon from '@/components/atoms/icons/PaperClip';
+import DollarIcon from '@/components/atoms/icons/Dollar';
 import StarIcon from '@/components/atoms/icons/Star';
 import UsersIcon from '@/components/atoms/icons/Users';
 import UserMinusIcon from '@/components/atoms/icons/UserMinus';
+import { UserRoles } from '../pages/Ratings';
 
 export interface RouteConfig {
   path: string;
@@ -26,68 +29,121 @@ export interface RouteConfig {
   showInSidebar: boolean;
 }
 
-export const appRoutes: RouteConfig[] = [
+export interface RoutesSelection {
+  sectionName?: string;
+  routes: RouteConfig[],
+}
+
+export const appRoutes: RoutesSelection[] = [
   {
-    path: '/',
-    name: 'Статистика',
-    element: <Statistics />,
-    icon: <ChartPieIcon />,
-    showInSidebar: true,
+    routes: [{
+      path: '/',
+      name: 'Статистика',
+      element: <Statistics />,
+      icon: <ChartPieIcon className="size-4" />,
+      showInSidebar: true,
+    }],
   },
   {
-    path: '/models',
-    name: 'Модели',
-    element: <Models />,
-    icon: <HeartIcon />,
-    showInSidebar: true,
+    routes: [{
+      path: '/models',
+      name: 'Модели',
+      element: <Models />,
+      icon: <HeartIcon className="size-4" />,
+      showInSidebar: true,
+    }],
   },
   {
-    path: '/bindings',
-    name: 'Назначения',
-    element: <BindingsModels />,
-    icon: <PaperClipIcon />,
-    showInSidebar: true,
+    routes: [{
+      path: '/bindings',
+      name: 'Назначения',
+      element: <BindingsModels />,
+      icon: <PaperClipIcon className="size-4" />,
+      showInSidebar: true,
+    }]
   },
   {
-    path: '/marketing',
-    name: 'Маркетинг',
-    element: <Marketing />,
-    icon: <DollarIcon />,
-    showInSidebar: true,
+    routes: [{
+      path: '/marketing',
+      name: 'Маркетинг',
+      element: <Marketing />,
+      icon: <DollarIcon className="size-4" />,
+      showInSidebar: true,
+    }]
   },
   {
-    path: '/ratings',
-    name: 'Рейтинг',
-    element: <Ratings />,
-    icon: <StarIcon />,
-    showInSidebar: true,
+    sectionName: 'Рейтинг',
+    routes: [
+      {
+        path: '/ratings/superadmins',
+        name: 'Супер-админы',
+        element: <Ratings roleFilter={UserRoles.SUPER_ADMIN} />,
+        icon: <StarIcon className="size-4" />,
+        showInSidebar: true,
+      },
+      {
+        path: '/ratings/ratings',
+        name: 'Топ-админы',
+        element: <Ratings roleFilter={UserRoles.TOP_ADMIN} />,
+        icon: <StarIcon className="size-4" />,
+        showInSidebar: true,
+      },
+      {
+        path: '/ratings/admins',
+        name: 'Админы',
+        element: <Ratings roleFilter={UserRoles.ADMIN} />,
+        icon: <StarIcon className="size-4" />,
+        showInSidebar: true,
+      },
+      {
+        path: '/ratings/operators',
+        name: 'Операторы',
+        element: <Ratings roleFilter={UserRoles.OPERATOR} />,
+        icon: <StarIcon className="size-4" />,
+        showInSidebar: true,
+      },
+      {
+        path: '/ratings/hr',
+        name: 'HR',
+        element: <Ratings roleFilter={UserRoles.HR} />,
+        icon: <StarIcon className="size-4" />,
+        showInSidebar: true,
+      }
+    ]
   },
   {
-    path: '/leavings',
-    name: 'Уходы',
-    element: <Leavings />,
-    icon: <UserMinusIcon />,
-    showInSidebar: true,
+    sectionName: 'Сотрудники',
+    routes: [
+      {
+        path: '/leavings',
+        name: 'Уходы',
+        element: <Leavings />,
+        icon: <UserMinusIcon className="size-4" />,
+        showInSidebar: true,
+      }, {
+        path: '/users',
+        name: 'Пользователи',
+        element: <Users />,
+        icon: <UsersIcon className="size-4" />,
+        showInSidebar: true,
+      }]
   },
   {
-    path: '/users',
-    name: 'Пользователи',
-    element: <Users />,
-    icon: <UsersIcon />,
-    showInSidebar: true,
+    routes: [{
+      path: '/settings',
+      name: 'Настройки',
+      element: <Settings />,
+      icon: <SettingsIcon className="size-4" />,
+      showInSidebar: false,
+    }]
   },
   {
-    path: '/settings',
-    name: 'Настройки',
-    element: <Settings />,
-    icon: <SettingsIcon />,
-    showInSidebar: false,
-  },
-  {
-    path: '/profile',
-    name: 'Профиль',
-    element: <Profile />,
-    icon: <UserIcon />,
-    showInSidebar: false,
+    routes: [{
+      path: '/profile',
+      name: 'Профиль',
+      element: <Profile />,
+      icon: <UserIcon className="size-4" />,
+      showInSidebar: false,
+    }]
   },
 ];

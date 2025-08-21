@@ -12,7 +12,6 @@ const BaseIcon: React.FC<IconProps> = ({ children, className, ...props }) => {
     strokeWidth: 1.5,
     stroke: 'currentColor',
   };
-
   return (
     <svg {...generalIconProps} {...props} className={mergeClassNames('size-6', className)}>
       {children}

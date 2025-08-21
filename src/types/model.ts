@@ -22,6 +22,8 @@ export interface Model {
   id: number | null;
   avatar: string;
   fullName: string;
+  username: string;
+  password: string;
   ml: string;
   status: Status;
   mailing: boolean;
@@ -65,6 +67,7 @@ export type StaffRole = 'Супер админ' | 'Топ админ' | 'Адм�
 
 export interface StaffRatingModel {
   id: number;
+  avatar: string;
   fullName: string;
   role: StaffRole;
   rating: number; // A number from 1 to 1000

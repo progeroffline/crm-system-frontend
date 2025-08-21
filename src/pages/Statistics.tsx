@@ -1,11 +1,11 @@
-import Stats from '@/components/molecules/StatsBadge';
 import CurveArrowUpIcon from '@/components/atoms/icons/CurveArrowUp';
 import DollarIcon from '@/components/atoms/icons/Dollar';
 import SearchIcon from '@/components/atoms/icons/Search';
 import SearchInputField from '@/components/molecules/inputs/Search';
-import MonthDailySalaryTable from '@/components/templates/tables/MonthDailySalary';
-import MonthDailyBalanceTable from '@/components/templates/tables/MonthDailyBalance';
+import Stats from '@/components/molecules/StatsBadge';
 import DateRangePickerField from '@/components/organisms/DateRangePicker';
+import MonthDailyBalanceTable from '@/components/templates/tables/MonthDailyBalance';
+import MonthDailySalaryTable from '@/components/templates/tables/MonthDailySalary';
 import MonthDailySalaryWithTimeShiftTable from '@/components/templates/tables/MonthDailySalaryWithTimeShift';
 import YearDailySalaryTableData from '@/components/templates/tables/YearDailySalary';
 
@@ -23,53 +23,51 @@ const Statistics: React.FC = () => {
 
   return (
     <div className="w-full p-4">
-      <div className="flex flex-row w-1/2 items-end justify-between pr-2">
+      <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 items-end">
         <DateRangePickerField
-          label="Выберите период"
-          confirmButtonLabel="Подтвердить выбор"
-          onClickToConfirmButton={(e) => console.log(e)}
-        />
+          title='Выберите период'
+          onSelect={(date: string[]) => console.log(date)} />
         <SearchInputField
           label="Оператор"
+          className="w-full"
           placeholder="Выберите оператора..."
-          className="mr-2"
           suggestions={suggestions}
         />
         <SearchInputField
+          className="w-full"
           label="Смена"
           placeholder="Выберите смену..."
-          className="mr-2"
           suggestions={suggestions}
         />
-        <button className="btn btn-primary">
-          <SearchIcon />
+        <button className="btn btn-neutral col-span-full lg:col-span-1">
+          <SearchIcon className="size-4" />
           Поиск
         </button>
       </div>
-      <div className="flex flex-row mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
         <Stats
-          className={'mr-4 flex-1'}
+          className={'w-full'}
           icon={<DollarIcon />}
           title="Баланс"
           value={10500}
           description="Ваш заработок за этот месяц"
         />
         <Stats
-          className={'flex-1'}
+          className={'w-full'}
           icon={<DollarIcon />}
           title="Прогноз"
           value={9304}
-          descriptionIcon={<CurveArrowUpIcon />}
+          descriptionIcon={<CurveArrowUpIcon className="svg-accent" />}
           description="Прогноз заработка на следующий месяц"
         />
       </div>
       <div className="mt-4">
-        <div className="text-left">
-          <h1 className="text-2xl font-bold">Балансы</h1>
+        <div className="text-left bg-base-100 p-1 rounded-box shadow p-2">
+          <h1 className="text-2xl font-bold ml-2 mb-2 text-center">Балансы</h1>
           <MonthDailyBalanceTable />
         </div>
         <div className="mt-4 text-left">
-          <h1 className="text-2xl font-bold">Статистика</h1>
+          <h1 className="text-2xl font-bold text-center">Статистика</h1>
           <div className="tabs tabs-lift">
             <input
               type="radio"

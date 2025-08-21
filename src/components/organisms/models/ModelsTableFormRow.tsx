@@ -15,26 +15,26 @@ const ModelsTableFormRow: React.FC<ModelsTableFormRowProps> = ({
 }) => {
   const createInputHandler =
     (setter: React.Dispatch<React.SetStateAction<Model | null>>) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
-      setter((prev) => (prev ? { ...prev, [e.target.name]: e.target.value } : null));
+      (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+        setter((prev) => (prev ? { ...prev, [e.target.name]: e.target.value } : null));
   const createCheckboxHandler =
     (setter: React.Dispatch<React.SetStateAction<Model | null>>) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, checked } = e.target;
-      setter((prev) => {
-        if (!prev) return null;
-        if (name === 'mailing') return { ...prev, mailing: checked };
-        return { ...prev, questionnaire: { ...prev.questionnaire, [name]: checked } };
-      });
-    };
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, checked } = e.target;
+        setter((prev) => {
+          if (!prev) return null;
+          if (name === 'mailing') return { ...prev, mailing: checked };
+          return { ...prev, questionnaire: { ...prev.questionnaire, [name]: checked } };
+        });
+      };
   const createQuestionnaireTextHandler =
     (setter: React.Dispatch<React.SetStateAction<Model | null>>) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
-      setter((prev) =>
-        prev ? { ...prev, questionnaire: { ...prev.questionnaire, [name]: value } } : null
-      );
-    };
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setter((prev) =>
+          prev ? { ...prev, questionnaire: { ...prev.questionnaire, [name]: value } } : null
+        );
+      };
 
   const handleInputChange = createInputHandler(setter);
   const handleCheckboxChange = createCheckboxHandler(setter);
@@ -80,6 +80,26 @@ const ModelsTableFormRow: React.FC<ModelsTableFormRowProps> = ({
           placeholder="ML"
           className="input input-bordered input-sm w-full"
           value={record.ml}
+          onChange={handleInputChange}
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="username"
+          placeholder="Логин"
+          className="input input-bordered input-sm w-full"
+          value={record.username}
+          onChange={handleInputChange}
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="password"
+          placeholder="Пароль"
+          className="input input-bordered input-sm w-full"
+          value={record.password}
           onChange={handleInputChange}
         />
       </td>

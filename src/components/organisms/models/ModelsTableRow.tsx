@@ -1,6 +1,7 @@
 import { Model } from '../../../types/model';
 import PencilIcon from '@/components/atoms/icons/Pencil';
 import TrashIcon from '../../atoms/icons/Trash';
+import EyeIcon from '@/components/atoms/icons/Eye';
 
 interface ModelsTableRowProps {
   model: Model;
@@ -37,6 +38,13 @@ const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
       </td>
       <td>{model.fullName}</td>
       <td>{model.ml}</td>
+      <td>{model.username}</td>
+      <td>
+        <div className='flex flex-row items-center justify-center text-center'>
+          ***********
+          <EyeIcon className='size-4 ml-2' onClick={() => (console.log("works"))} />
+        </div>
+      </td>
       <td>
         <BooleanDisplay value={model.mailing} />
       </td>

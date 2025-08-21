@@ -50,10 +50,12 @@ const BindingsTableRow: React.FC<BindingsTableRowProps> = ({
       <td>{model.total}</td>
       <td>{model.forecast}</td>
       <td>{model.registrationDate}</td>
-      <td>{model.operator || '---'}</td>
-      <td>{model.admin || '---'}</td>
       <td>{model.superAdmin || '---'}</td>
+      <td>{model.admin || '---'}</td>
       <td>{model.topAdmin || '---'}</td>
+      <td>{model.operator || '---'}</td>
+      <td>{model.operator || '---'}</td>
+      <td>{model.operator || '---'}</td>
       <td>
         <span className={`badge w-full ${statusColors[model.status]}`}>{model.status}</span>
       </td>

@@ -4,7 +4,7 @@ import colorizeCellByValue from './shared.ts';
 
 interface MonthDailySalary {
   id: number;
-  operatorName: string;
+  model: string;
   dayNumber_1: number | null;
   dayNumber_2: number | null;
   dayNumber_3: number | null;
@@ -47,8 +47,8 @@ const MonthDailySalaryTable: React.FC = () => {
   ): DataTableColumnDefinition<MonthDailySalary>[] => {
     const columns: DataTableColumnDefinition<MonthDailySalary>[] = [
       {
-        accessorKey: 'operatorName',
-        header: 'Оператор',
+        accessorKey: 'model',
+        header: 'Mодель',
         setCellClassName: (): string => 'font-medium',
         asTh: true,
       },

@@ -23,7 +23,7 @@ const MonthDailySalaryWithTimeShiftTable: React.FC = () => {
     const columns: DataTableColumnDefinition<MonthDailySalaryWithTimeShift>[] = [
       {
         accessorKey: 'operatorName',
-        header: 'Оператор',
+        header: 'Модель',
         setCellClassName: (): string => 'font-medium',
         asTh: true,
       },

@@ -45,6 +45,8 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ initialModels }) => {
                 <th>Фото</th>
                 <th>ФИО</th>
                 <th>ML</th>
+                <th>Логин</th>
+                <th>Пароль</th>
                 <th>Рассылка</th>
                 <th>Кастомы</th>
                 <th>Звонки</th>

@@ -16,8 +16,8 @@ const StaffRatingsTable: React.FC<StaffRatingsTableProps> = ({ initialData }) =>
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
         <div>
-            <h1 className="text-2xl font-bold">Рейтинг</h1>
-            <p className="text-base-content/70">Рейтинг сотрудников по различным показателям производительности.</p>
+          <h1 className="text-2xl font-bold">Рейтинг</h1>
+          <p className="text-base-content/70">Рейтинг сотрудников по различным показателям производительности.</p>
         </div>
       </div>
 
@@ -26,6 +26,7 @@ const StaffRatingsTable: React.FC<StaffRatingsTableProps> = ({ initialData }) =>
           <table className="table table-zebra w-full">
             <thead>
               <tr className="align-middle">
+                <th>Фото</th>
                 <th>ФИО</th>
                 <th>Роль</th>
                 <th>Рейтинг</th>
