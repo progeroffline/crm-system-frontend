@@ -25,8 +25,9 @@ const Statistics: React.FC = () => {
     <div className="w-full p-4">
       <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 items-end">
         <DateRangePickerField
-          title='Выберите период'
-          onSelect={(date: string[]) => console.log(date)} />
+          title="Выберите период"
+          onSelect={(date: string[]) => console.log(date)}
+        />
         <SearchInputField
           label="Оператор"
           className="w-full"

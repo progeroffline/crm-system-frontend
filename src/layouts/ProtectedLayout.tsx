@@ -17,7 +17,6 @@ const ProtectedLayout = () => {
     setSidebarCollapsed(!isSidebarCollapsed);
   };
 
-
   return (
     <div className="flex h-screen">
       <SideBar isCollapsed={isSidebarCollapsed} items={appRoutes} />

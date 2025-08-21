@@ -141,8 +141,7 @@ const DataTable = <T extends { id: string | number }>({
                 }
                 const value = column.accessorKey ? footerData[column.accessorKey] : null;
                 return (
-                  <td key={`footer_${String(column.accessorKey)}_${index}`
-                  }>
+                  <td key={`footer_${String(column.accessorKey)}_${index}`}>
                     {value ? formatCell(value as number | string) : ''}
                   </td>
                 );
@@ -151,7 +150,7 @@ const DataTable = <T extends { id: string | number }>({
           </tfoot>
         )}
       </table>
-    </div >
+    </div>
   );
 };
 export default DataTable;

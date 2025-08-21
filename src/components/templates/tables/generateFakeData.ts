@@ -57,19 +57,7 @@ export function generateMonthDailySalaries(
   return data;
 }
 
-type MonthIndex =
-  0
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | 10
-  | 11;
+type MonthIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
 export type YearDailySalary = {
   id: number;
@@ -79,9 +67,7 @@ export type YearDailySalary = {
   [K in `dayNumber_${MonthIndex}`]: number | null;
 };
 
-export function generateYearDailySalaries(
-  operatorsCount: number,
-): YearDailySalary[] {
+export function generateYearDailySalaries(operatorsCount: number): YearDailySalary[] {
   const data: YearDailySalary[] = [];
 
   for (let i = 1; i <= operatorsCount; i++) {

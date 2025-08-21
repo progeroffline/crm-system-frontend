@@ -30,7 +30,9 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ initialModels }) => {
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-2xl font-bold">Модели</h1>
-          <p className="text-base-content/70">Управление моделями, их анкетами и основной информацией.</p>
+          <p className="text-base-content/70">
+            Управление моделями, их анкетами и основной информацией.
+          </p>
         </div>
         <button className="btn btn-primary" onClick={handleAdd} disabled={isAdding || isEditing}>
           Добавить модель

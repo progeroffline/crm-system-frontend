@@ -16,12 +16,12 @@ export const useUsersManager = (initialData: UserModel[]) => {
       setEditingRecord(null);
     }
   };
-  
+
   const handleDelete = (id: number) => {
-      if (window.confirm('Вы уверены, что хотите удалить этого пользователя?')) {
-          setData(data.filter(user => user.id !== id));
-      }
-  }
+    if (window.confirm('Вы уверены, что хотите удалить этого пользователя?')) {
+      setData(data.filter((user) => user.id !== id));
+    }
+  };
 
   return {
     data,

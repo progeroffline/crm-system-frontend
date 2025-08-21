@@ -57,7 +57,9 @@ const Profile: React.FC = () => {
                 <h2 className="card-title flex items-center gap-2">
                   <UserIcon className="w-6 h-6" /> Профиль
                 </h2>
-                <p className="text-base-content/70">Управление вашим профилем, аватаром и настройками.</p>
+                <p className="text-base-content/70">
+                  Управление вашим профилем, аватаром и настройками.
+                </p>
               </div>
               <div className="md:col-span-2 flex flex-col sm:flex-row gap-6 items-center">
                 <div className="tooltip tooltip-right" data-tip="Нажмите, чтобы изменить">

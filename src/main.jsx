@@ -10,10 +10,12 @@ import ProtectedLayout from './layouts/ProtectedLayout';
 import GuestLayout from './layouts/GuestLayout';
 import { appRoutes } from './routes';
 
-const protectedRoutes = appRoutes.flatMap((section) => section.routes.map((route) => ({
-  path: route.path,
-  element: route.element,
-})));
+const protectedRoutes = appRoutes.flatMap((section) =>
+  section.routes.map((route) => ({
+    path: route.path,
+    element: route.element,
+  }))
+);
 
 const router = createBrowserRouter([
   {

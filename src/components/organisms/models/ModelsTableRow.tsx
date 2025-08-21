@@ -40,9 +40,9 @@ const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
       <td>{model.ml}</td>
       <td>{model.username}</td>
       <td>
-        <div className='flex flex-row items-center justify-center text-center'>
+        <div className="flex flex-row items-center justify-center text-center">
           ***********
-          <EyeIcon className='size-4 ml-2' onClick={() => (console.log("works"))} />
+          <EyeIcon className="size-4 ml-2" onClick={() => console.log('works')} />
         </div>
       </td>
       <td>

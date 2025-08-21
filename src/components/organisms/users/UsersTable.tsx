@@ -22,8 +22,10 @@ const UsersTable: React.FC<UsersTableProps> = ({ initialData }) => {
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
         <div>
-            <h1 className="text-2xl font-bold">Пользователи</h1>
-            <p className="text-base-content/70">Управление пользователями системы, их ролями и доступами.</p>
+          <h1 className="text-2xl font-bold">Пользователи</h1>
+          <p className="text-base-content/70">
+            Управление пользователями системы, их ролями и доступами.
+          </p>
         </div>
       </div>
 

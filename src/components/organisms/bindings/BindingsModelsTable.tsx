@@ -30,7 +30,9 @@ const BindingsModelsTable: React.FC<BindingsModelsTableProps> = ({ initialModels
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-2xl font-bold">Панель назначения</h1>
-          <p className="text-base-content/70">Распределение моделей между администраторами и операторами.</p>
+          <p className="text-base-content/70">
+            Распределение моделей между администраторами и операторами.
+          </p>
         </div>
         <button className="btn btn-primary" onClick={handleAdd} disabled={isAdding || isEditing}>
           Назначить модель

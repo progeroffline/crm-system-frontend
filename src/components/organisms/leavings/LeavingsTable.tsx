@@ -16,7 +16,9 @@ const LeavingsTable: React.FC<LeavingsTableProps> = ({ initialData }) => {
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-2xl font-bold">Уходы операторов</h1>
-          <p className="text-base-content/70">Информация об уволенных сотрудниках и причинах ухода.</p>
+          <p className="text-base-content/70">
+            Информация об уволенных сотрудниках и причинах ухода.
+          </p>
         </div>
       </div>
 

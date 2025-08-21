@@ -158,16 +158,16 @@ const DataTreeTable = <T extends { id: string | number }>({
           {leafColumns.map((column, columnIndex) => {
             const cellContent = column.cell
               ? column.cell({
-                row: {
-                  ...item,
-                  getIsExpanded: () => isExpanded,
-                  getToggleExpandedHandler: () => () => toggleRow(item.id),
-                  canExpand: hasChildren,
-                  original: item,
-                },
-              })
+                  row: {
+                    ...item,
+                    getIsExpanded: () => isExpanded,
+                    getToggleExpandedHandler: () => () => toggleRow(item.id),
+                    canExpand: hasChildren,
+                    original: item,
+                  },
+                })
               : column.accessorKey
-                ? formatCell(item[column.accessorKey] as number) ?? ''
+                ? (formatCell(item[column.accessorKey] as number) ?? '')
                 : '';
 
             return columnIndex === 0 ? (
@@ -198,7 +198,7 @@ const DataTreeTable = <T extends { id: string | number }>({
                 className={mergeClassNames([
                   column.setCellClassName && column.accessorKey
                     ? column.setCellClassName(item[column.accessorKey], item as T)
-                    : ''
+                    : '',
                 ])}
                 key={String(column.accessorKey)}
               >
@@ -231,56 +231,53 @@ const DataTreeTable = <T extends { id: string | number }>({
     <div className="max-h-200 overflow-x-auto scrollbar-hide mt-2">
       <table className="table-compact w-full">
         <thead>
+          <tr>
+            {headerRows[0] &&
+              headerRows[0].map((col, colIndex) => {
+                const isGroup = !!col.columns;
+                const colSpan = getColSpan(col);
+                const rowSpan = !isGroup ? maxDepth : 1;
+                return (
+                  <th key={colIndex} colSpan={colSpan} rowSpan={rowSpan}>
+                    {col.header}
+                  </th>
+                );
+              })}
+            <th key="total-header" rowSpan={maxDepth} style={{ right: 0 }}>
+              Всего
+            </th>
+            <th key="plan-header" rowSpan={maxDepth}>
+              План
+            </th>
+            <th key="plan-execution-header" colSpan={2}>
+              Выполнение плана
+            </th>
+          </tr>
+          {maxDepth > 1 && (
             <tr>
-                {headerRows[0] && headerRows[0].map((col, colIndex) => {
-                    const isGroup = !!col.columns;
-                    const colSpan = getColSpan(col);
-                    const rowSpan = !isGroup ? maxDepth : 1;
-                    return (
-                        <th key={colIndex} colSpan={colSpan} rowSpan={rowSpan}>
-                            {col.header}
-                        </th>
-                    );
+              {headerRows[1] &&
+                headerRows[1].map((col, colIndex) => {
+                  return <th key={colIndex}>{col.header}</th>;
                 })}
-                <th key="total-header" rowSpan={maxDepth} style={{ right: 0 }}>
-                    Всего
-                </th>
-                <th key="plan-header" rowSpan={maxDepth}>
-                    План
-                </th>
-                <th key="plan-execution-header" colSpan={2}>
-                    Выполнение плана
-                </th>
+              <th>Разница</th>
+              <th>%</th>
             </tr>
-            {maxDepth > 1 && (
-                <tr>
-                    {headerRows[1] && headerRows[1].map((col, colIndex) => {
-                        return (
-                            <th key={colIndex}>
-                                {col.header}
-                            </th>
-                        );
-                    })}
-                    <th>Разница</th>
-                    <th>%</th>
-                </tr>
-            )}
+          )}
         </thead>
         <tbody>{data.map((item, index) => renderRow(item, 0, (index + 1) % 2 === 0))}</tbody>
         <tfoot>
           <tr>
-            {leafColumns.map((column, index) => (
+            {leafColumns.map((column, index) =>
               index === 0 ? (
                 <th key="footer-title">Итого</th>
-              ) :
-                (
-                  <td key={index}>
-                    {column.accessorKey && totals[String(column.accessorKey)] !== undefined
-                      ? formatCell(totals[String(column.accessorKey)]) : ''
-                    }
-                  </td>
-                )
-            ))}
+              ) : (
+                <td key={index}>
+                  {column.accessorKey && totals[String(column.accessorKey)] !== undefined
+                    ? formatCell(totals[String(column.accessorKey)])
+                    : ''}
+                </td>
+              )
+            )}
             <th style={{ right: 0 }}>
               {formatCell(Object.values(totals).reduce((acc, total) => acc + total, 0))}
             </th>
@@ -295,3 +292,4 @@ const DataTreeTable = <T extends { id: string | number }>({
 };
 
 export default DataTreeTable;
+

@@ -2,19 +2,7 @@ import DataTable, { DataTableColumnDefinition } from '@/components/molecules/tab
 import colorizeCellByValue from './shared.ts';
 import { generateYearDailySalaries } from './generateFakeData.ts';
 
-type MonthIndex =
-  0
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | 10
-  | 11;
+type MonthIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
 export type MonthDailySalary = {
   id: number;
@@ -45,7 +33,19 @@ const YearDailySalaryTable: React.FC = () => {
       },
     ];
 
-    const daysOfWeek = ['Январь', 'Февраль', 'Март', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    const daysOfWeek = [
+      'Январь',
+      'Февраль',
+      'Март',
+      'Май',
+      'Июнь',
+      'Июль',
+      'Август',
+      'Сентябрь',
+      'Октябрь',
+      'Ноябрь',
+      'Декабрь',
+    ];
 
     for (let i = 1; i <= daysInMonth; i++) {
       const dayOfWeek = daysOfWeek[(startingDayOfWeek + i - 2) % 7];

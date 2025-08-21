@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import "flatpickr/dist/themes/light.css";
+import 'flatpickr/dist/themes/light.css';
 import Flatpickr from 'react-flatpickr';
 import { Russian } from 'flatpickr/dist/l10n/ru.js';
 
@@ -14,8 +14,8 @@ const DateRangePickerField: React.FC<DateRangePickerFieldProps> = ({ title, onSe
   });
 
   return (
-    <div className='flex flex-col'>
-      <legend className='w-full fieldset-legend text-base'>{title}</legend>
+    <div className="flex flex-col">
+      <legend className="w-full fieldset-legend text-base">{title}</legend>
       <Flatpickr
         className="input input-bordered"
         options={{

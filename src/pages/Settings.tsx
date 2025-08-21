@@ -41,9 +41,7 @@ const Settings: React.FC = () => {
                 <h2 className="card-title flex items-center gap-2">
                   <SettingsIcon className="w-6 h-6" /> Общие настройки
                 </h2>
-                <p className="text-base-content/70">
-                  Глобальные настройки CRM-системы.
-                </p>
+                <p className="text-base-content/70">Глобальные настройки CRM-системы.</p>
               </div>
               <div className="md:col-span-2 grid sm:grid-cols-2 gap-4">
                 <div className="form-control">

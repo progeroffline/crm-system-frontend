@@ -3,12 +3,12 @@ import StaffRatingsTable from '../components/organisms/staffRatings/StaffRatings
 import { generateFakeStaffRatingData } from '../components/templates/tables/generateFakeData';
 
 export enum UserRoles {
-  USER = "user",
-  HR = "HR",
-  OPERATOR = "оператор",
-  ADMIN = "Администратор",
-  TOP_ADMIN = "Топ админ",
-  SUPER_ADMIN = "Супер админ",
+  USER = 'user',
+  HR = 'HR',
+  OPERATOR = 'оператор',
+  ADMIN = 'Администратор',
+  TOP_ADMIN = 'Топ админ',
+  SUPER_ADMIN = 'Супер админ',
 }
 
 interface RatingsPageProps {
@@ -16,7 +16,9 @@ interface RatingsPageProps {
 }
 
 const Ratings: React.FC<RatingsPageProps> = ({ roleFilter }) => {
-  const ratingData = generateFakeStaffRatingData(25).filter((record) => roleFilter ? record.role == roleFilter : true);
+  const ratingData = generateFakeStaffRatingData(25).filter((record) =>
+    roleFilter ? record.role == roleFilter : true
+  );
   const breadcrumbPaths = [
     { name: 'Главная', to: '/' },
     { name: 'Рейтинг', to: '/ratings' },

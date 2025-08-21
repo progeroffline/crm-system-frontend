@@ -17,7 +17,9 @@ const StaffRatingsTable: React.FC<StaffRatingsTableProps> = ({ initialData }) =>
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-2xl font-bold">Рейтинг</h1>
-          <p className="text-base-content/70">Рейтинг сотрудников по различным показателям производительности.</p>
+          <p className="text-base-content/70">
+            Рейтинг сотрудников по различным показателям производительности.
+          </p>
         </div>
       </div>
 

@@ -31,46 +31,54 @@ export interface RouteConfig {
 
 export interface RoutesSelection {
   sectionName?: string;
-  sectionIcon?: React.ReactElement,
-  routes: RouteConfig[],
+  sectionIcon?: React.ReactElement;
+  routes: RouteConfig[];
 }
 
 export const appRoutes: RoutesSelection[] = [
   {
-    routes: [{
-      path: '/',
-      name: 'Статистика',
-      element: <Statistics />,
-      icon: <ChartPieIcon className="size-4" />,
-      showInSidebar: true,
-    }],
+    routes: [
+      {
+        path: '/',
+        name: 'Статистика',
+        element: <Statistics />,
+        icon: <ChartPieIcon className="size-4" />,
+        showInSidebar: true,
+      },
+    ],
   },
   {
-    routes: [{
-      path: '/models',
-      name: 'Модели',
-      element: <Models />,
-      icon: <HeartIcon className="size-4" />,
-      showInSidebar: true,
-    }],
+    routes: [
+      {
+        path: '/models',
+        name: 'Модели',
+        element: <Models />,
+        icon: <HeartIcon className="size-4" />,
+        showInSidebar: true,
+      },
+    ],
   },
   {
-    routes: [{
-      path: '/bindings',
-      name: 'Назначения',
-      element: <BindingsModels />,
-      icon: <PaperClipIcon className="size-4" />,
-      showInSidebar: true,
-    }]
+    routes: [
+      {
+        path: '/bindings',
+        name: 'Назначения',
+        element: <BindingsModels />,
+        icon: <PaperClipIcon className="size-4" />,
+        showInSidebar: true,
+      },
+    ],
   },
   {
-    routes: [{
-      path: '/marketing',
-      name: 'Маркетинг',
-      element: <Marketing />,
-      icon: <DollarIcon className="size-4" />,
-      showInSidebar: true,
-    }]
+    routes: [
+      {
+        path: '/marketing',
+        name: 'Маркетинг',
+        element: <Marketing />,
+        icon: <DollarIcon className="size-4" />,
+        showInSidebar: true,
+      },
+    ],
   },
   {
     sectionName: 'Рейтинг',
@@ -110,8 +118,8 @@ export const appRoutes: RoutesSelection[] = [
         element: <Ratings roleFilter={UserRoles.HR} />,
         icon: <p>HR</p>,
         showInSidebar: true,
-      }
-    ]
+      },
+    ],
   },
   {
     sectionName: 'Сотрудники',
@@ -122,30 +130,36 @@ export const appRoutes: RoutesSelection[] = [
         element: <Leavings />,
         icon: <UserMinusIcon className="size-4" />,
         showInSidebar: true,
-      }, {
+      },
+      {
         path: '/users',
         name: 'Пользователи',
         element: <Users />,
         icon: <UsersIcon className="size-4" />,
         showInSidebar: true,
-      }]
+      },
+    ],
   },
   {
-    routes: [{
-      path: '/settings',
-      name: 'Настройки',
-      element: <Settings />,
-      icon: <SettingsIcon className="size-4" />,
-      showInSidebar: false,
-    }]
+    routes: [
+      {
+        path: '/settings',
+        name: 'Настройки',
+        element: <Settings />,
+        icon: <SettingsIcon className="size-4" />,
+        showInSidebar: false,
+      },
+    ],
   },
   {
-    routes: [{
-      path: '/profile',
-      name: 'Профиль',
-      element: <Profile />,
-      icon: <UserIcon className="size-4" />,
-      showInSidebar: false,
-    }]
+    routes: [
+      {
+        path: '/profile',
+        name: 'Профиль',
+        element: <Profile />,
+        icon: <UserIcon className="size-4" />,
+        showInSidebar: false,
+      },
+    ],
   },
 ];
