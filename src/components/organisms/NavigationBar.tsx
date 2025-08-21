@@ -39,7 +39,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ onToggleSidebar }) => {
       <div className="mr-2">
         <ThemeControls />
       </div>
-      <div className="mr-3 z-2">
+      <div className="mr-3 z-3">
         <div className="drawer drawer-end">
           <input
             id="account-drawer"
@@ -106,7 +106,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ onToggleSidebar }) => {
                     </Link>
                   </li>
                   <li className="mt-2">
-                    <button className="btn btn-soft btn-primary" onClick={handleLogout}>
+                    <button className="btn btn-soft btn-neutral" onClick={handleLogout}>
                       Выйти
                       <ExitIcon />
                     </button>

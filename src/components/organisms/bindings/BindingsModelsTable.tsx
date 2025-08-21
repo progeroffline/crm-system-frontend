@@ -34,7 +34,7 @@ const BindingsModelsTable: React.FC<BindingsModelsTableProps> = ({ initialModels
             Распределение моделей между администраторами и операторами.
           </p>
         </div>
-        <button className="btn btn-primary" onClick={handleAdd} disabled={isAdding || isEditing}>
+        <button className="btn btn-neutral" onClick={handleAdd} disabled={isAdding || isEditing}>
           Назначить модель
         </button>
       </div>

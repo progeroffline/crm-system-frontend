@@ -34,7 +34,7 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ initialModels }) => {
             Управление моделями, их анкетами и основной информацией.
           </p>
         </div>
-        <button className="btn btn-primary" onClick={handleAdd} disabled={isAdding || isEditing}>
+        <button className="btn btn-neutral" onClick={handleAdd} disabled={isAdding || isEditing}>
           Добавить модель
         </button>
       </div>

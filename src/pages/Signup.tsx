@@ -62,7 +62,7 @@ const Signup = () => {
           </fieldset>
         </div>
         <div className="w-full flex flex-col items-center">
-          <button className="btn btn-block btn-primary">
+          <button className="btn btn-block btn-neutral">
             Создать аккаунт
             <EnterIcon />
           </button>
