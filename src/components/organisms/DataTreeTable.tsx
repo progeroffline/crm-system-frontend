@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ChevronRightIcon from '../atoms/icons/ChevronRight';
 import ChevronDownIcon from '../atoms/icons/ChevronDown';
+import { formatCell, mergeClassNames } from '@/lib/utils';
 
 export interface DataTreeTableColumnDefinition<T> {
   header: string;
@@ -88,9 +89,65 @@ const DataTreeTable = <T extends { id: string | number }>({
     });
   };
 
+  const getVisibleData = (items: TreeItem<T>[]): TreeItem<T>[] => {
+    const visibleData: TreeItem<T>[] = [];
+
+    const traverse = (item: TreeItem<T>) => {
+      visibleData.push(item);
+      if (expandedRows.has(item.id) && item.children) {
+        item.children.forEach(traverse);
+      }
+    };
+
+    items.forEach(traverse);
+    return visibleData;
+  };
+
+  const calculateTotals = (rows: TreeItem<T>[]) => {
+    const totals: { [key: string]: number } = {};
+    leafColumns.forEach((column) => {
+      if (column.accessorKey) {
+        const total = rows.reduce((acc, row) => {
+          const value = row[column.accessorKey as keyof T];
+          if (typeof value === 'number') {
+            return acc + value;
+          }
+          if (typeof value === 'string') {
+            const parsedValue = parseFloat(value);
+            if (!isNaN(parsedValue)) {
+              return acc + parsedValue;
+            }
+          }
+          return acc;
+        }, 0);
+        totals[String(column.accessorKey)] = total;
+      }
+    });
+    return totals;
+  };
+
+  const visibleData = getVisibleData(data);
+  const totals = calculateTotals(visibleData);
+
   const renderRow = (item: TreeItem<T>, level: number, isEven: boolean) => {
     const isExpanded = expandedRows.has(item.id);
     const hasChildren = item.children && item.children.length > 0;
+
+    const rowTotal = leafColumns.reduce((acc, column) => {
+      if (column.accessorKey) {
+        const value = item[column.accessorKey as keyof T];
+        if (typeof value === 'number') {
+          return acc + value;
+        }
+        if (typeof value === 'string') {
+          const parsedValue = parseFloat(value);
+          if (!isNaN(parsedValue)) {
+            return acc + parsedValue;
+          }
+        }
+      }
+      return acc;
+    }, 0);
 
     return (
       <React.Fragment key={item.id}>
@@ -101,16 +158,16 @@ const DataTreeTable = <T extends { id: string | number }>({
           {leafColumns.map((column, columnIndex) => {
             const cellContent = column.cell
               ? column.cell({
-                  row: {
-                    ...item,
-                    getIsExpanded: () => isExpanded,
-                    getToggleExpandedHandler: () => () => toggleRow(item.id),
-                    canExpand: hasChildren,
-                    original: item,
-                  },
-                })
+                row: {
+                  ...item,
+                  getIsExpanded: () => isExpanded,
+                  getToggleExpandedHandler: () => () => toggleRow(item.id),
+                  canExpand: hasChildren,
+                  original: item,
+                },
+              })
               : column.accessorKey
-                ? String(item[column.accessorKey] ?? '')
+                ? formatCell(item[column.accessorKey] as number) ?? ''
                 : '';
 
             return columnIndex === 0 ? (
@@ -121,9 +178,9 @@ const DataTreeTable = <T extends { id: string | number }>({
                     : ''
                 }
                 key={String(column.accessorKey)}
-                style={{ paddingLeft: `${columnIndex === 0 ? level * 20 + 10 : 10}px` }}
+                style={{ paddingLeft: `${columnIndex === 0 ? level * 20 + 4 : 4}px` }}
               >
-                <div className="flex items-center">
+                <div className="flex items-center text-xs">
                   {columnIndex === 0 && hasChildren && (
                     <span className="mr-2">
                       {isExpanded ? (
@@ -138,29 +195,30 @@ const DataTreeTable = <T extends { id: string | number }>({
               </th>
             ) : (
               <td
-                className={
+                className={mergeClassNames([
                   column.setCellClassName && column.accessorKey
                     ? column.setCellClassName(item[column.accessorKey], item as T)
                     : ''
-                }
+                ])}
                 key={String(column.accessorKey)}
-                style={{ paddingLeft: `${columnIndex === 0 ? level * 20 + 10 : 10}px` }}
               >
-                <div className="flex items-center">
-                  {columnIndex === 0 && hasChildren && (
-                    <span className="mr-2">
-                      {isExpanded ? (
-                        <ChevronDownIcon className="size-3" />
-                      ) : (
-                        <ChevronRightIcon className="size-3" />
-                      )}
-                    </span>
-                  )}
-                  {cellContent}
-                </div>
+                {columnIndex === 0 && hasChildren && (
+                  <span className="mr-2">
+                    {isExpanded ? (
+                      <ChevronDownIcon className="size-3" />
+                    ) : (
+                      <ChevronRightIcon className="size-3" />
+                    )}
+                  </span>
+                )}
+                {cellContent}
               </td>
             );
           })}
+          <th style={{ right: 0 }}>{formatCell(rowTotal)}</th>
+          <td className="text-xs">0</td>
+          <td className="text-xs">0</td>
+          <td className="text-xs">0</td>
         </tr>
         {isExpanded &&
           hasChildren &&
@@ -170,26 +228,67 @@ const DataTreeTable = <T extends { id: string | number }>({
   };
 
   return (
-    <div className="h-100 overflow-x-auto shadow rounded-sm">
-      <table className="table-compact">
+    <div className="max-h-200 overflow-x-auto scrollbar-hide mt-2">
+      <table className="table-compact w-full">
         <thead>
-          {headerRows.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              {row.map((col, colIndex) => {
-                const isGroup = !!col.columns;
-                const colSpan = getColSpan(col);
-                const rowSpan = !isGroup ? maxDepth - rowIndex : 1;
-
-                return (
-                  <th key={colIndex} colSpan={colSpan} rowSpan={rowSpan}>
-                    {col.header}
-                  </th>
-                );
-              })}
+            <tr>
+                {headerRows[0] && headerRows[0].map((col, colIndex) => {
+                    const isGroup = !!col.columns;
+                    const colSpan = getColSpan(col);
+                    const rowSpan = !isGroup ? maxDepth : 1;
+                    return (
+                        <th key={colIndex} colSpan={colSpan} rowSpan={rowSpan}>
+                            {col.header}
+                        </th>
+                    );
+                })}
+                <th key="total-header" rowSpan={maxDepth} style={{ right: 0 }}>
+                    Всего
+                </th>
+                <th key="plan-header" rowSpan={maxDepth}>
+                    План
+                </th>
+                <th key="plan-execution-header" colSpan={2}>
+                    Выполнение плана
+                </th>
             </tr>
-          ))}
+            {maxDepth > 1 && (
+                <tr>
+                    {headerRows[1] && headerRows[1].map((col, colIndex) => {
+                        return (
+                            <th key={colIndex}>
+                                {col.header}
+                            </th>
+                        );
+                    })}
+                    <th>Разница</th>
+                    <th>%</th>
+                </tr>
+            )}
         </thead>
         <tbody>{data.map((item, index) => renderRow(item, 0, (index + 1) % 2 === 0))}</tbody>
+        <tfoot>
+          <tr>
+            {leafColumns.map((column, index) => (
+              index === 0 ? (
+                <th key="footer-title">Итого</th>
+              ) :
+                (
+                  <td key={index}>
+                    {column.accessorKey && totals[String(column.accessorKey)] !== undefined
+                      ? formatCell(totals[String(column.accessorKey)]) : ''
+                    }
+                  </td>
+                )
+            ))}
+            <th style={{ right: 0 }}>
+              {formatCell(Object.values(totals).reduce((acc, total) => acc + total, 0))}
+            </th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+          </tr>
+        </tfoot>
       </table>
     </div>
   );

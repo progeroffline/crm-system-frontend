@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 type MonthDailySalaryWithTimeShift = {
   id: number;
   operatorName: string;
@@ -55,7 +57,8 @@ export function generateMonthDailySalaries(
   return data;
 }
 
-type DayNumber =
+type MonthIndex =
+  0
   | 1
   | 2
   | 3
@@ -66,39 +69,18 @@ type DayNumber =
   | 8
   | 9
   | 10
-  | 11
-  | 12
-  | 13
-  | 14
-  | 15
-  | 16
-  | 17
-  | 18
-  | 19
-  | 20
-  | 21
-  | 22
-  | 23
-  | 24
-  | 25
-  | 26
-  | 27
-  | 28
-  | 29
-  | 30
-  | 31;
+  | 11;
 
 export type YearDailySalary = {
   id: number;
-  operatorName: string;
+  model: string;
   predicate: number;
 } & {
-  [K in `dayNumber_${DayNumber}`]: number | null;
+  [K in `dayNumber_${MonthIndex}`]: number | null;
 };
 
 export function generateYearDailySalaries(
   operatorsCount: number,
-  daysInMonth: number = 31
 ): YearDailySalary[] {
   const data: YearDailySalary[] = [];
 
@@ -106,10 +88,10 @@ export function generateYearDailySalaries(
     const row: any = {
       id: i,
       predicate: 0,
-      operatorName: `OP ${String.fromCharCode(64 + i)}`, // Оператор А, Б, В...
+      model: `ML ${String.fromCharCode(64 + i)}`,
     };
 
-    for (let day = 1; day <= daysInMonth; day++) {
+    for (let day = 1; day <= 12; day++) {
       const daySalary = getRandomFloat(0, 4000);
       row[`dayNumber_${day}`] = daySalary;
       if (typeof daySalary === 'number') row.predicate += daySalary;
@@ -195,6 +177,8 @@ const generateSingleFakeModel = (): Model => {
     ...person,
     avatar: `https://i.pravatar.cc/150?img=${randomImgId}`,
     ml: `ML-${getRandomInt(10000, 99999)}`,
+    username: faker.internet.username(),
+    password: faker.internet.password(),
     status: getRandomElement(dataPools.statuses.model),
     mailing: getRandomBoolean(),
     questionnaire: {
@@ -284,6 +268,7 @@ export const generateFakeMarketingData = (count: number): MarketingModel[] => {
 
 /** Generates data for the Staff Ratings table */
 export const generateFakeStaffRatingData = (count: number): StaffRatingModel[] => {
+  const randomImgId = () => Math.floor(Math.random() * 70) + 1;
   const roles: StaffRole[] = ['Супер админ', 'Топ админ', 'Администратор', 'Оператор', 'HR'];
   const namePool = {
     'Супер админ': dataPools.superAdmins,
@@ -297,6 +282,7 @@ export const generateFakeStaffRatingData = (count: number): StaffRatingModel[] =
     const role = getRandomElement(roles);
     return {
       id: getRandomId(),
+      avatar: `https://i.pravatar.cc/150?img=${randomImgId()}`,
       fullName: getRandomElement(namePool[role]),
       role,
       rating: getRandomInt(1, 1000),

@@ -114,15 +114,6 @@ const LeavingsTableFormRow: React.FC<LeavingsTableFormRowProps> = ({
       </td>
       <td>
         <input
-          type="text"
-          name="translator"
-          className="input input-bordered input-sm w-full"
-          value={record.translator || ''}
-          onChange={handleInputChange}
-        />
-      </td>
-      <td>
-        <input
           type="number"
           name="balance.current"
           className="input input-bordered input-sm w-full"

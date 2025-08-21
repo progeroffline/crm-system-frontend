@@ -30,7 +30,6 @@ const LeavingsTableRow: React.FC<LeavingsTableRowProps> = ({ record, onEdit }) =
       <td>{record.superTopAdmin || '---'}</td>
       <td>{record.topAdmin || '---'}</td>
       <td>{record.administrator || '---'}</td>
-      <td>{record.translator || '---'}</td>
       <td>{formatCell(record.balance.current)}</td>
       <td>{formatCell(record.balance.previous)}</td>
       <td>{formatCell(record.balance.позапрошлый)}</td>

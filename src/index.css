@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inclusive+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Nata+Sans:wght@100..900&display=swap');
 
-:root {
-  font-family: 'Inclusive Sans', sans-serif;
+#root {
+  font-family: 'DM Sans', sans-serif;
+  font-family: 'Nata Sans', sans-serif;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -12,3 +13,4 @@
   -ms-overflow-style: none; /* IE и Edge */
   scrollbar-width: none; /* Firefox */
 }
+

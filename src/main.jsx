@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+import { StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
@@ -10,10 +10,10 @@ import ProtectedLayout from './layouts/ProtectedLayout';
 import GuestLayout from './layouts/GuestLayout';
 import { appRoutes } from './routes';
 
-const protectedRoutes = appRoutes.map((route) => ({
+const protectedRoutes = appRoutes.flatMap((section) => section.routes.map((route) => ({
   path: route.path,
   element: route.element,
-}));
+})));
 
 const router = createBrowserRouter([
   {
@@ -44,7 +44,15 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <Suspense
+        fallback={
+          <div className="flex h-screen items-center justify-center">
+            <span className="loading loading-infinity loading-xl"></span>
+          </div>
+        }
+      >
+        <RouterProvider router={router} />
+      </Suspense>
     </AuthProvider>
   </StrictMode>
 );

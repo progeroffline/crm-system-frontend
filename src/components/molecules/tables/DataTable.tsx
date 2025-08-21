@@ -72,8 +72,8 @@ const DataTable = <T extends { id: string | number }>({
   buildHeaderRows(columns, 0);
 
   return (
-    <div className="max-h-200 overflow-x-auto scrollbar-hide shadow rounded-xs">
-      <table className="table-compact text-center">
+    <div className="max-h-200 overflow-x-auto scrollbar-hide">
+      <table className="table-compact w-full">
         <thead>
           {headerRows.map((row, rowIndex) => (
             <tr key={rowIndex}>
@@ -141,7 +141,8 @@ const DataTable = <T extends { id: string | number }>({
                 }
                 const value = column.accessorKey ? footerData[column.accessorKey] : null;
                 return (
-                  <td key={`footer_${String(column.accessorKey)}_${index}`}>
+                  <td key={`footer_${String(column.accessorKey)}_${index}`
+                  }>
                     {value ? formatCell(value as number | string) : ''}
                   </td>
                 );
@@ -150,7 +151,7 @@ const DataTable = <T extends { id: string | number }>({
           </tfoot>
         )}
       </table>
-    </div>
+    </div >
   );
 };
 export default DataTable;

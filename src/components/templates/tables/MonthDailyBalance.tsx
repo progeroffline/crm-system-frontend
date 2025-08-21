@@ -49,7 +49,7 @@ const MonthDailyBalanceTable: React.FC = () => {
       {
         accessorKey: 'username',
         header: 'Админ',
-        setCellClassName: (): string => 'font-medium',
+        setCellClassName: (): string => 'min-w-36',
       },
     ];
 

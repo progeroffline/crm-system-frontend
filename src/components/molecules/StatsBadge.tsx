@@ -27,7 +27,7 @@ const StatsBage: React.FC<StatsBadgeProps> = ({
   return (
     <div className={mergeClassNames(['stats', 'shadow', 'bg-base-100', className])}>
       <div className="stat">
-        <div className="stat-figure text-secondary">{icon}</div>
+        <div className="stat-figure text-accent">{icon}</div>
         <div className="stat-title">{title}</div>
         <div className="stat-value">${formatterValue}</div>
         <div className="stat-desc flex items-center">

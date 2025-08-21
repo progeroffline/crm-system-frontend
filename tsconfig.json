@@ -2,7 +2,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["ESNext", "DOM", "DOM.Iterable", "vite/client"],
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+    ],
     "module": "ESNext",
     "skipLibCheck": true,
     /* Bundler mode */
@@ -20,10 +24,13 @@
     /* Absolute Imports */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["src"],
-  "files": ["src/types/cally.d.ts"],
+  "include": [
+    "src"
+  ],
   "references": []
 }

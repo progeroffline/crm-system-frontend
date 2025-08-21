@@ -47,10 +47,12 @@ const BindingsModelsTable: React.FC<BindingsModelsTableProps> = ({ initialModels
                 <th>Тотал</th>
                 <th>Прогноз</th>
                 <th>Дата рег.</th>
-                <th>Оператор</th>
-                <th>Админ</th>
                 <th>Супер админ</th>
                 <th>Топ админ</th>
+                <th>Админ</th>
+                <th>Оператор 08-16</th>
+                <th>Оператор 16-00</th>
+                <th>Оператор 00-08</th>
                 <th>Статус</th>
                 <th>Рассылка</th>
                 <th>Действия</th>
