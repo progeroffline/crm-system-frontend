@@ -36,8 +36,8 @@ const SideBar: React.FC<SideBarProps> = ({ isCollapsed, items }) => {
       </div>
       <ul className="menu p-2 w-full">
         {getSidebarRoutes(items).map((section) => (
-          <li>
-            {section.sectionName ? <p key={section.sectionName} className='menu-label mt-2'>{section.sectionName}</p > : ''}
+          <li className='w-full'>
+            {section.sectionName && !isCollapsed ? <p key={section.sectionName} className='menu-label mt-2'>{section.sectionName}</p > : ''}
             {
               section.routes.filter((item) => item.showInSidebar).map((item) => (
                 isCollapsed ? (
@@ -70,3 +70,5 @@ const SideBar: React.FC<SideBarProps> = ({ isCollapsed, items }) => {
 };
 
 export default SideBar;
+
+

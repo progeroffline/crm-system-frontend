@@ -31,6 +31,7 @@ export interface RouteConfig {
 
 export interface RoutesSelection {
   sectionName?: string;
+  sectionIcon?: React.ReactElement,
   routes: RouteConfig[],
 }
 
@@ -73,40 +74,41 @@ export const appRoutes: RoutesSelection[] = [
   },
   {
     sectionName: 'Рейтинг',
+    sectionIcon: <StarIcon className="size-4" />,
     routes: [
       {
         path: '/ratings/superadmins',
         name: 'Супер-админы',
         element: <Ratings roleFilter={UserRoles.SUPER_ADMIN} />,
-        icon: <StarIcon className="size-4" />,
+        icon: <p>CA</p>,
         showInSidebar: true,
       },
       {
         path: '/ratings/ratings',
         name: 'Топ-админы',
         element: <Ratings roleFilter={UserRoles.TOP_ADMIN} />,
-        icon: <StarIcon className="size-4" />,
+        icon: <p>TA</p>,
         showInSidebar: true,
       },
       {
         path: '/ratings/admins',
         name: 'Админы',
         element: <Ratings roleFilter={UserRoles.ADMIN} />,
-        icon: <StarIcon className="size-4" />,
+        icon: <p>AД</p>,
         showInSidebar: true,
       },
       {
         path: '/ratings/operators',
         name: 'Операторы',
         element: <Ratings roleFilter={UserRoles.OPERATOR} />,
-        icon: <StarIcon className="size-4" />,
+        icon: <p>OП</p>,
         showInSidebar: true,
       },
       {
         path: '/ratings/hr',
         name: 'HR',
         element: <Ratings roleFilter={UserRoles.HR} />,
-        icon: <StarIcon className="size-4" />,
+        icon: <p>HR</p>,
         showInSidebar: true,
       }
     ]
