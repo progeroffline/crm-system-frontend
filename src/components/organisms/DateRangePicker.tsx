@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import 'flatpickr/dist/themes/light.css';
-import Flatpickr from 'react-flatpickr';
-import { Russian } from 'flatpickr/dist/l10n/ru.js';
+import DatePicker from 'react-datepicker';
 
 interface DateRangePickerFieldProps {
   title: string;
@@ -9,26 +8,24 @@ interface DateRangePickerFieldProps {
 }
 
 const DateRangePickerField: React.FC<DateRangePickerFieldProps> = ({ title, onSelect }) => {
-  const [state, setState] = useState({
-    date: ['2016-10-10', '2016-10-20'],
-  });
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  const onChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
 
   return (
-    <div className="flex flex-col">
-      <legend className="w-full fieldset-legend text-base">{title}</legend>
-      <Flatpickr
-        className="input input-bordered"
-        options={{
-          dateFormat: 'd.m.Y',
-          showMonths: 2,
-          mode: 'range',
-          static: true,
-          locale: Russian,
-        }}
-        value={state.date}
-        onChange={onSelect}
-      />
-    </div>
+    <DatePicker
+      selected={startDate}
+      onChange={onChange}
+      startDate={startDate}
+      endDate={endDate}
+      selectsRange
+      rangeSeparator=" to "
+    />
   );
 };
 

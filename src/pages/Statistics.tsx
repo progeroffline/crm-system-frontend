@@ -3,11 +3,11 @@ import DollarIcon from '@/components/atoms/icons/Dollar';
 import SearchIcon from '@/components/atoms/icons/Search';
 import SearchInputField from '@/components/molecules/inputs/Search';
 import Stats from '@/components/molecules/StatsBadge';
-import DateRangePickerField from '@/components/organisms/DateRangePicker';
 import MonthDailyBalanceTable from '@/components/templates/tables/MonthDailyBalance';
 import MonthDailySalaryTable from '@/components/templates/tables/MonthDailySalary';
 import MonthDailySalaryWithTimeShiftTable from '@/components/templates/tables/MonthDailySalaryWithTimeShift';
 import YearDailySalaryTableData from '@/components/templates/tables/YearDailySalary';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Statistics: React.FC = () => {
   const suggestions: string[] = [
@@ -24,9 +24,11 @@ const Statistics: React.FC = () => {
   return (
     <div className="w-full p-4">
       <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 items-end">
-        <DateRangePickerField
-          title="Выберите период"
-          onSelect={(date: string[]) => console.log(date)}
+        <SearchInputField
+          label="Выберите период"
+          className="w-full"
+          placeholder="Период..."
+          suggestions={suggestions}
         />
         <SearchInputField
           label="Оператор"
