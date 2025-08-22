@@ -2,6 +2,7 @@ import { Model } from '../../../types/model';
 import PencilIcon from '@/components/atoms/icons/Pencil';
 import TrashIcon from '../../atoms/icons/Trash';
 import EyeIcon from '@/components/atoms/icons/Eye';
+import { useState } from 'react';
 
 interface ModelsTableRowProps {
   model: Model;
@@ -27,6 +28,11 @@ const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
   onEdit,
   onDelete,
 }) => {
+  const [isPasswordHidden, setPasswordHidden] = useState<boolean>(true);
+  const togglePasswordHiddenStatus = () => {
+    setPasswordHidden(!isPasswordHidden);
+  };
+
   return (
     <tr className="hover:bg-base-300">
       <td>
@@ -41,8 +47,8 @@ const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
       <td>{model.username}</td>
       <td>
         <div className="flex flex-row items-end" style={{ lineHeight: '100%' }}>
-          ***********
-          <EyeIcon className="size-4 ml-2" onClick={() => console.log('works')} />
+          {isPasswordHidden ? '******************' : model.password}
+          <EyeIcon className="size-4 ml-2" onClick={togglePasswordHiddenStatus} />
         </div>
       </td>
       <td>
