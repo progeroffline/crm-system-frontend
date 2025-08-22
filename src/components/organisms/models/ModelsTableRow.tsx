@@ -40,7 +40,7 @@ const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
       <td>{model.ml}</td>
       <td>{model.username}</td>
       <td>
-        <div className="flex flex-row items-center justify-center text-center">
+        <div className="flex flex-row items-end" style={{ lineHeight: '100%' }}>
           ***********
           <EyeIcon className="size-4 ml-2" onClick={() => console.log('works')} />
         </div>
@@ -94,21 +94,23 @@ const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
           {model.status}
         </span>
       </td>
-      <td className="flex flex-col gap-1">
-        <button
-          className="btn btn-info btn-xs"
-          onClick={() => onEdit(model)}
-          disabled={isEditingOrAdding}
-        >
-          <PencilIcon className="h-4 w-4" />
-        </button>
-        <button
-          className="btn btn-error btn-xs"
-          onClick={() => onDelete(model.id)}
-          disabled={isEditingOrAdding}
-        >
-          <TrashIcon className="h-4 w-4" />
-        </button>
+      <td>
+        <div className="flex flex-row gap-1">
+          <button
+            className="btn btn-ghost btn-xs"
+            onClick={() => onEdit(model)}
+            disabled={isEditingOrAdding}
+          >
+            <PencilIcon className="h-4 w-4" />
+          </button>
+          <button
+            className="btn btn-ghost btn-xs"
+            onClick={() => onDelete(model.id)}
+            disabled={isEditingOrAdding}
+          >
+            <TrashIcon className="h-4 w-4" />
+          </button>
+        </div>
       </td>
     </tr>
   );
