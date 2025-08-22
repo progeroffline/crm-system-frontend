@@ -36,7 +36,7 @@ const LeavingsTableRow: React.FC<LeavingsTableRowProps> = ({ record, onEdit }) =
       <td>{record.balance.total}</td>
       <td>
         <div className="flex flex-row items-center justify-center">
-          <button className="btn btn-info btn-xs w-full" onClick={() => onEdit(record)}>
+          <button className="btn btn-soft btn-xs" onClick={() => onEdit(record)}>
             <Pencil className="h-4 w-4" />
           </button>
         </div>

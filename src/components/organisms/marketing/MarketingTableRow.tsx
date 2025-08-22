@@ -48,20 +48,24 @@ const MarketingTableRow: React.FC<MarketingTableRowProps> = ({
       <td>{record.superTopAdmin || '---'}</td>
       <td>{record.topAdmin || '---'}</td>
       <td>
-        <span className={`badge w-full ${statusColors[record.status]}`}>{record.status}</span>
+        <span className={`badge badge-soft w-full ${statusColors[record.status]}`}>
+          {record.status}
+        </span>
       </td>
       <td>
         <div className="flex flex-col items-center align-center">
-          <button className="btn btn-info btn-xs mb-1 w-full" onClick={() => onEdit(record)}>
-            <PencilIcon className="h-4 w-4" />
-          </button>
-          <button
-            className="btn btn-error btn-xs w-full"
-            onClick={() => onDelete(record.id)}
-            disabled={isEditingOrAdding}
-          >
-            <TrashIcon className="h-4 w-4" />
-          </button>
+          <div className="flex flex-row gap-1">
+            <button className="btn btn-soft btn-xs" onClick={() => onEdit(record)}>
+              <PencilIcon className="h-4 w-4" />
+            </button>
+            <button
+              className="btn btn-soft btn-error btn-xs"
+              onClick={() => onDelete(record.id)}
+              disabled={isEditingOrAdding}
+            >
+              <TrashIcon className="h-4 w-4" />
+            </button>
+          </div>
         </div>
       </td>
     </tr>

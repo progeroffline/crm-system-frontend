@@ -57,7 +57,9 @@ const BindingsTableRow: React.FC<BindingsTableRowProps> = ({
       <td>{model.operator || '---'}</td>
       <td>{model.operator || '---'}</td>
       <td>
-        <span className={`badge w-full ${statusColors[model.status]}`}>{model.status}</span>
+        <span className={`badge badge-soft w-full ${statusColors[model.status]}`}>
+          {model.status}
+        </span>
       </td>
       <td>
         <BooleanDisplay value={model.mailing} />

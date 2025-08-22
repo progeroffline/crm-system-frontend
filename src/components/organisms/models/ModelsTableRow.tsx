@@ -96,21 +96,21 @@ const ModelsTableRow: React.FC<ModelsTableRowProps> = ({
       <td>{model.questionnaire.sexToys}</td>
       <td>{model.questionnaire.notReadyFor}</td>
       <td>
-        <span className={`w-full p-2 badge text-center ${statusColors[model.status]}`}>
+        <span className={`w-full p-2 badge badge-soft text-center ${statusColors[model.status]}`}>
           {model.status}
         </span>
       </td>
       <td>
         <div className="flex flex-row gap-1">
           <button
-            className="btn btn-ghost btn-xs"
+            className="btn btn-soft btn-xs"
             onClick={() => onEdit(model)}
             disabled={isEditingOrAdding}
           >
             <PencilIcon className="h-4 w-4" />
           </button>
           <button
-            className="btn btn-ghost btn-xs"
+            className="btn btn-soft btn-error btn-xs"
             onClick={() => onDelete(model.id)}
             disabled={isEditingOrAdding}
           >

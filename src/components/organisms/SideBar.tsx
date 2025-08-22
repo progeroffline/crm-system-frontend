@@ -38,8 +38,8 @@ const SideBar: React.FC<SideBarProps> = ({ isCollapsed, items }) => {
         </Link>
       </div>
       <ul className="menu w-full">
-        {getSidebarRoutes(items).map((section) => (
-          <li className="w-full">
+        {getSidebarRoutes(items).map((section, index) => (
+          <li className="w-full" key={`${index}_li`}>
             {section.sectionName && !isCollapsed ? (
               <p className="menu-title" key={section.sectionName}>
                 {section.sectionName}
@@ -54,6 +54,7 @@ const SideBar: React.FC<SideBarProps> = ({ isCollapsed, items }) => {
                   <NavLink
                     to={item.path}
                     data-tip={item.name}
+                    key={`${item.name}_a`}
                     className={mergeClassNames([
                       'flex',
                       'mb-1',
@@ -72,13 +73,14 @@ const SideBar: React.FC<SideBarProps> = ({ isCollapsed, items }) => {
                   </NavLink>
                 ))
             ) : (
-              <ul>
+              <ul key={`${section.sectionName}_ul`}>
                 {section.routes
                   .filter((item) => item.showInSidebar)
                   .map((item) => (
-                    <li>
+                    <li key={`${item.name}_li`}>
                       <NavLink
                         to={item.path}
+                        key={`${item.name}_a`}
                         className={`flex mb-1 items-center h-10 ${currentLocation.pathname === item.path ? 'menu-active' : ''}`}
                       >
                         <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center">

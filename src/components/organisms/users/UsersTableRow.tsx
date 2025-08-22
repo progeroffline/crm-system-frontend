@@ -29,11 +29,11 @@ const UsersTableRow: React.FC<UsersTableRowProps> = ({ record, onEdit, onDelete 
       <td>{new Date(record.lastLogin).toLocaleString()}</td>
       <td>${record.balance.toFixed(2)}</td>
       <td>
-        <div className="flex flex-col">
-          <button className="btn btn-info btn-xs mb-1" onClick={() => onEdit(record)}>
+        <div className="flex flex-row gap-1">
+          <button className="btn btn-soft btn-xs mb-1" onClick={() => onEdit(record)}>
             <Pencil className="h-4 w-4" />
           </button>
-          <button className="btn btn-error btn-xs" onClick={() => onDelete(record.id)}>
+          <button className="btn btn-soft btn-error btn-xs" onClick={() => onDelete(record.id)}>
             <Trash className="h-4 w-4" />
           </button>
         </div>
