@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import LogotypeImage from '../atoms/branding/LogotypeImage';
 import LogotypeLabel from '../atoms/branding/Logotype';
 import { RoutesSelection } from '@/routes';
+import { mergeClassNames } from '@/lib/utils';
 
 interface SideBarProps {
   isCollapsed: boolean;
@@ -40,28 +41,41 @@ const SideBar: React.FC<SideBarProps> = ({ isCollapsed, items }) => {
         {getSidebarRoutes(items).map((section) => (
           <li className="w-full">
             {section.sectionName && !isCollapsed ? (
-              <h2 className="menu-title" key={section.sectionName}>
+              <p className="menu-title" key={section.sectionName}>
                 {section.sectionName}
-              </h2>
+              </p>
             ) : (
               ''
             )}
-            <ul>
-              {section.routes
+            {isCollapsed ? (
+              section.routes
                 .filter((item) => item.showInSidebar)
-                .map((item) =>
-                  isCollapsed ? (
-                    <li>
-                      <NavLink
-                        to={item.path}
-                        className={`flex mb-1 items-center h-10 p-0 justify-center ${currentLocation.pathname === item.path ? 'menu-active' : ''}`}
-                      >
-                        <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center">
-                          {item.icon}
-                        </div>
-                      </NavLink>
-                    </li>
-                  ) : (
+                .map((item) => (
+                  <NavLink
+                    to={item.path}
+                    data-tip={item.name}
+                    className={mergeClassNames([
+                      'flex',
+                      'mb-1',
+                      'items-center',
+                      'h-10',
+                      'p-0',
+                      'justify-center',
+                      'tooltip',
+                      'tooltip-right',
+                      currentLocation.pathname === item.path ? 'menu-active' : '',
+                    ])}
+                  >
+                    <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center">
+                      {item.icon}
+                    </div>
+                  </NavLink>
+                ))
+            ) : (
+              <ul>
+                {section.routes
+                  .filter((item) => item.showInSidebar)
+                  .map((item) => (
                     <li>
                       <NavLink
                         to={item.path}
@@ -73,9 +87,9 @@ const SideBar: React.FC<SideBarProps> = ({ isCollapsed, items }) => {
                         <span className="transition-all duration-200 w-full">{item.name}</span>
                       </NavLink>
                     </li>
-                  )
-                )}
-            </ul>
+                  ))}
+              </ul>
+            )}
           </li>
         ))}
       </ul>

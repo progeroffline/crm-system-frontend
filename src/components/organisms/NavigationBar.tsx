@@ -31,7 +31,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ onToggleSidebar }) => {
           htmlFor="main-drawer"
           onClick={onToggleSidebar}
           aria-label="open sidebar"
-          className="btn btn-square btn-ghost"
+          className="btn btn-square btn-ghost ml-1"
         >
           <MenuIcon />
         </label>
