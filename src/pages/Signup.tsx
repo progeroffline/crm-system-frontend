@@ -23,11 +23,11 @@ const Signup = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col items-center p-2 ">
-      <LogotypeImage className="w-xs" />
+    <div className="h-screen flex flex-col items-center justify-start p-4">
+      <LogotypeImage className="w-38 md:w-52" />
       <form
         onSubmit={handleLogin}
-        className="w-lg min-h-1/2 flex flex-col justify-between p-6 border rounded-2xl border-gray-500"
+        className="w-full max-w-md flex flex-col justify-between p-6 border rounded-2xl border-gray-500"
       >
         <div className="flex justify-between items-center">
           <LogotypeLabel variant="lg" />
@@ -35,8 +35,8 @@ const Signup = () => {
         </div>
         <div className="w-full flex flex-col justify-center items-center">
           <div className="w-full flex flex-col justify-center items-center mb-6">
-            <h3 className="text-3xl font-bold mb-2">Создать аккаунт</h3>
-            <p className="text-base text-center">
+            <h3 className="text-2xl sm:text-3xl font-bold my-4">Создать аккаунт</h3>
+            <p className="text-base text-center text-sm lg:text-lg">
               Создайте аккаунт для Lumens CRM, чтоб получить доступ к функционалу
             </p>
           </div>
@@ -61,12 +61,12 @@ const Signup = () => {
             />
           </fieldset>
         </div>
-        <div className="w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center mt-10">
           <button className="btn btn-block btn-neutral">
             Создать аккаунт
             <EnterIcon />
           </button>
-          <a className="link mt-1" href="/login">
+          <a className="link mt-2" href="/login">
             Войти в существующий аккаунт
           </a>
         </div>
